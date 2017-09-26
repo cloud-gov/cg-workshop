@@ -15,7 +15,8 @@ The Cloud Foundry command-line interface (CLI) is a multiplatform binary written
 * Collaboration
 * Corroboration
 
-^ You can put commands into files, with variables, and then run them. You can share code by viewing text files, or even copy/paste, in ways you can't with GUIs (nb: skip Snover anecdote). And with version control you can corroborate that the change you mean to make is the change expressed by the code.
+^ You can put commands into files, with variables, and then run them.<br> You can share code by viewing text files, or even copy/paste, in ways you can't with GUIs (nb: skip Snover anecdote). <br> And with version control you can corroborate that the change you mean to make is the change expressed by the code. <br> With the dashboard we provide overview tools and roles/permissions since those may be needed by project managers how are not using the CLI day-by-day
+
 
 ---
 
@@ -97,7 +98,7 @@ API endpoint: https://api.fr.cloud.gov
 One Time Code ( Get one at https://login.fr.cloud.gov/passcode )>
 ```
 
-Visit the URL [https://login.fr.cloud.gov/passcode](https://login.fr.cloud.gov/passcode), complete the login to _cloud.gov_, and you'll get a one-time passcode. Copy/paste the passcode back into the CLI, as show [in this video](TKTK).
+Visit the URL [https://login.fr.cloud.gov/passcode](https://login.fr.cloud.gov/passcode), complete the login to _cloud.gov_, and you'll get a one-time passcode. Copy/paste the passcode back into the CLI, as show [in this 30s video](TKTK).
 
 ---
 
@@ -132,14 +133,9 @@ Once you have `cf orgs` working, try the following:
 
 ---
 
-# 3 Static website
-
-Our simplest example. We'll use `cf push` to send the files to cloud.gov, and it'll package the site and start to serive it.
-
-
----
-
 # Lab 3: Download _workshop labs_ and deploy a _static website_ to _yourname_.app.cloud.gov
+
+Our simplest example. We'll get our _lab materials_, then use `cf push` to send the files to _cloud.gov_.  Cloud.gov will package the site and start to serve it.
 
 ^ We have working environment, a cloud.gov account, a working `cf` connection to the cloud.gov account. Now we need to materials for the rest of our labs. Then we can release a website.
 
@@ -164,6 +160,8 @@ iwr -o cgw.zip https://bit.ly/cgw-zip
 7z x cgz.zip   # If no 7zip, use File Explorer to unpack
 cd cg-workshop-master
 ```
+
+^ Instructor: Run through the entire set of slides then wait for participants to catch up
 
 ---
 
@@ -197,6 +195,8 @@ Don't literally use _myfname-lname_ below. Use your own name like, _jane-doe_:
 cf push -f lab03-site/manifest.yml myfname-lname
 ```
 
+^ If you do use myfname-lname, you'll run into a `route conflict` with someone else trying to use that same name.`
+
 ---
 
 [.build-lists: true]
@@ -204,8 +204,9 @@ cf push -f lab03-site/manifest.yml myfname-lname
 
 
 * Upload: Files are sent to CF for new app _myfname-lname_
-  * The `-f lab-03-site/manifest.yml` is a _deployment manifest_
-* Staging: Artifact is created (droplet)
+  * `-f lab-03-site/manifest.yml` is a _deployment manifest_
+* Staging: 
+  * Artifact is created (droplet)
 * Running: 
   * A _route_ is created to the app
   * Site starts on an web host
@@ -213,7 +214,9 @@ cf push -f lab03-site/manifest.yml myfname-lname
 
 ---
 
-![](images/app_push_flow_diagram_diego.png)
+![fit](images/app_push_flow_diagram_diego.png)
+
+^ You run a `cf` command. Terms: "Binary data store" "database"<br>Applications are run in 'containers' hosted in 'Cells'. First a staging cell builds your application and all the dependencies, and stores in the binary store. Then 'Running' cell can pick it up and run one or more copies of it.
 
 ---
 
@@ -222,7 +225,7 @@ cf push -f lab03-site/manifest.yml myfname-lname
 The `cf push` results should resemble:
 
 ```
-$ cf push -p lab03-site/ peter-burkholder
+$ cf push -f lab03-site/manifest.yml peter-burkholder
 Creating app peter-burkholder in org s-cao / space p.burk...
 OK
 Uploading peter-burkholder...
@@ -284,24 +287,48 @@ When you can access your site, try the following:
 
 ---
 
+# BREAK 
+
+We'll break here so folks can catch up with:
+
+* workstation setup
+* account creation - can you login to:   [https://dashboard.fr.cloud.gov](https://dashboard.fr.cloud.gov)?
+* CLI install - can you run:   `   cf   `   ?
+* labs download - can you:   ```    cd $HOME/cg-workshop-master   ```   ?
+
+You can skip doing _cf push_ as we'll pick up from there in the next section.
+
+---
+
 # I want to run a _dynamic webapp_
 # So that users can _interact_ with us
 
 ---
 
-# 4 Sinatra Application
+# Lab 4: Sinatra Application
 
 We'll use _cf push_ again, but this time to _stage_ and run a dynamic web applicaton. We'll see how to use the _manifest.yml_ to set deployment options.
 
+The manifest provides application _metadata_ to CloudFoundry. We use it for non-default settings so we don't have to always specify on the command line, and we can bundle with the application.
+
+^ As with static site, let's review the slides, then we'll pause for everyone to run the commands<br> Sinatra is a _ruby_ web framework. The deployment process is the same for any supported Cloud Foundry language.
+
 ---
+
+[.build-lists: true]
 
 # What happens when I _cf push_? (v2.0)
 
-* Upload: **App** files sent to CF
-* Staging: **Executable** artifact is created (droplet)
-Running: ~~Site~~ **App** starts on an ~~web~~ **app** host
+* Upload: **App** files are sent to CF for new app _myfname-lname_
+* Staging: 
+  * **Executable** artifact is created (droplet)
+  * **All build dependencies are bundled into _droplet_**
+* Running: 
+  * A _route_ is created to the **app** ~~site~~
+  * ~~Site~~ **App** starts on an ~~web~~ **app** host
+  * ~~Site~~ **App** serves web requests **(if it binds to TCP port)**
 
-~~Site~~ **App** receives web requests **(if it binds to TCP port)**
+^ This last point -- we can also have _worker_ applications that's don't directly server traffic. Will Slack will mention those with Federalist.  Let's revisit the push command and update for an application. There's extra work in the _staging_ phase, where _buildpacks_ come into play.
 
 ---
 
@@ -314,6 +341,8 @@ App Files + Runtime Dependencies = App Artifact (droplet)
 If it’s a web process, it binds to a TCP port
 Instances are distributed across multiple cells
 Router distributes traffic across instances
+
+^ If you look at the labs04-app/Gemfile you'll see a lot of dependencies that the buildpack handles.
 
 ---
 
@@ -340,18 +369,13 @@ Router distributes traffic across instances
 
 ---
 
-
-# Lab 4: Deploy an application and set its _deployment manifest_
-
----
-
-# 4.1:  Review the _deployment manifest_
-
-Make sure you're in `cg-workshop/04_webapp`, then run
+# Lab 4.1:  Review the _deployment manifest_
 
 ```powershell
-more manifest.yml
+more lab04-app/manifest.yml
 ```
+
+How much memory/disk are we saving compared to defaults of 512Mb RAM and 1024Mb disk quota?
 
 ---
 
@@ -363,26 +387,32 @@ The manifest should contain:
 ---
 applications:
 - name: cglab
-  random-route: true
   memory: 64m
+  disk-quota: 128m
+  random-route: true
 #  buildpack: ruby_buildpack
 ```
 
-Since all of us will push this same application, they can't all be at https://cglab.app.cloud.gov.
+All of us will have an app, _cglab_, but we can't all have it _routed_ to 
+https://cglab.app.cloud.gov.
 
-The lines starting with hashmarks, #, are comments and not (yet) used
+_random-route_ will append random words to the URL.
+
+^ We use 1/8th the resource allocation.
 
 ---
 
-# N.M Push the application
+# Lab 4.2 Push the application
 
 ```powershell
-cf push
+cf push -f lab04-app/manifest.yml
 ```
+
+^ There's no need for `name` since that's in the manifest.
 
 ---
 
-# Check your work...
+# Check your work 4.2
 
 The cf push results should resemble those below. Note all the buildpacks (and use of buildpack detection)
 
@@ -402,21 +432,22 @@ Downloaded ruby_buildpack (81.6K)
 [.footer: continued....]
 
 ---
+
 # check your work, continued
 
-The cf push final output should resemble below. Note the highlighted `urls`. Since we use `random-route` the URL is [https:/cglab-confessable-pardner.app.cloud.gov](https://cglab-confessable-pardner.app.cloud.gov)
+The cf push final output should resemble below. Note the highlighted `urls`. Since we use `random-route` the URL here is [https:/cglab-confessable-pardner.app.cloud.gov](https://cglab-confessable-pardner.app.cloud.gov)
 
 ```powershell, [.highlight: 4]
 ...
 instances: 1/1
-usage: 512M x 1 instances
+usage: 64M x 1 instances
 urls: cglab-confessable-pardner.app.cloud.gov
 last uploaded: Thu Sep 21 01:48:46 UTC 2017
 stack: cflinuxfs2
 buildpack: ruby
 
      state     since                    cpu    memory      disk      details
-#0   running   2017-09-20 09:49:19 PM   0.0%   0 of 512M   0 of 1G
+#0   running   2017-09-20 09:49:19 PM   0.0%   0 of 64M   0 of 128M 
 ```
 
 [.footer: continued....]
@@ -430,12 +461,12 @@ https://cglab-RANDOM-WORDS.app.cloud.gov <br>
 e.g., <br>
 [https:/cglab-confessable-pardner.app.cloud.gov](https://cglab-confessable-pardner.app.cloud.gov)
 
-![right,fit](04_webapp/images/webapp.png)
+![right,fit](lab04-app/images/webapp.png)
 
 
 ---
 
-# N.M Review the app status and health.
+# Lab 4.3 Review the app status and health.
 
 Run:
 
@@ -447,7 +478,7 @@ How much memory and disk is it using?
 
 ---
 
-# Check your work
+# Check your work 4.3
 
 The _cf app_ output should resemble:
 
@@ -457,25 +488,27 @@ Showing health and status for app cglab in org sandbox-cao
 name:              cglab
 requested state:   started
 instances:         1/1
-usage:             512M x 1 instances
+usage:             64M x 1 instances
 routes:            cglab-confessable-pardner.app.cloud.gov
 last uploaded:     Wed 20 Sep 22:06:14 EDT 2017
 stack:             cflinuxfs2
 buildpack:         ruby
 
      state     since                  cpu    memory          disk          details
-#0   running   2017-09-21T02:06:44Z   0.0%   19.2M of 512M   80.8M of 1G
+#0   running   2017-09-21T02:06:44Z   0.0%   19.2M of 64M   80.8M of 128M 
 ```
 
 ---
 
 # Further exploration
 
-Try the following:
+Once you've visited your app and viewed `cf app cgapp`, try the following:
 
-* Uncomment the `manifest.yml` lines with `buildpack` and `memory`, then run `cf push` and check status with `cf app cglab`. What's changed in staging or application status?
-* How does the updated manifest change release time? Try `time cf push` (shell) or `Measure-Command {cf push}` (powershell)
-* Run `cf buildpacks`. What languages are availble by default?
+* Run `cf buildpacks`. What languages are available by default?
+* Uncomment the `manifest.yml` line with `buildpack`, then run `cf push` and check status with `cf app cglab`. What's changed in staging or application status?
+* Does the updated manifest change release time? Try `time cf push` (shell) or `Measure-Command {cf push}` (powershell)
+
+^ Instructor: Pause here
 
 ---
 
@@ -485,7 +518,7 @@ Try the following:
 ---
 
 
-# 7. I can share persistent data between app instances
+# Lab 5. I can share persistent data between app instances
 
 First we'll see the _services_ available to us, then use _create-service_ 
 to provision a simple Redis data store. We'll then _bind_ that service to 
@@ -493,16 +526,15 @@ our application.  Our application we'll use its _environment variables_ to deter
 the connection information
 
 
-
 ---
 
-# 7.1 Review the available _services_
+# Lab 5.1 Review the available _services_
 
 Run `cf marketplace` and look for the _redis_ services. Examine the details with `cf marketplace -s redis32`. 
 
 ---
 
-# Check your work 7.1
+# Check your work 5.1
 
 ```
 $ cf marketplace
@@ -513,12 +545,12 @@ service                       plans                         description
 aws-rds                       shared-psql, medium-psql* ... Persistent DBs using Amazon RDS
 ...
 redis28                       standard         An open source in-memory data structure store.
-redis32                       standard-ha, standard       An open source in-memory database.
+redis32                       micro, standard-ha, standard       An open source in-memory database.
 ```
 
 ---
 
-# Check your work 7.1, continued
+# Check your work 5.1, continued
 
 ```
 $ cf marketplace -s redis32
@@ -526,29 +558,30 @@ Getting service plan information for service redis32 as peter.burkholder@cao.gov
 OK
 
 service plan   description                                             free or paid
+micro          Redis 3.2, persistent storage, 32m.                     free
 standard-ha    Redis 3.2 with Redis Sentinel and persistent storage.   free
 standard       Redis 3.2 with persistent storage.                      free
 ```
 
 ---
 
-# 7.2 Create a Redis service with _create-service_
+# Lab 5.2: Create a Redis service with _create-service_
 
 See the command help with `cf create-service -h`. Note the format is:
 `cf create-service redis32  PLAN  NAME`
 
 Then issue the command: 
-`cf create-service redis32  standard  cglab-redis`
+`cf create-service redis32  micro  cglab-redis`
 
 Wait one minute, then check your service with:
 `cf service cglab-redis`
 
 ---
 
-# Check your work 7.2
+# Check your work 5.2
 
 ```
-$ cf create-service redis32  standard  cglab-redis
+$ cf create-service redis32  micro cglab-redis
 Creating service instance cglab-redis in org sandbox-cao 
 OK
 
@@ -567,7 +600,7 @@ Updated: 2017-09-21T14:42:01Z
 
 ---
 
-# 7.3 Associate service and app with _bind-service_
+# Lab 5.3 Associate service and app with _bind-service_
 
 When `cf service cglab-redis` status is healthy, get
 current app `environment` with: 
@@ -581,7 +614,7 @@ Compare new results of
 
 ---
 
-# Check your work 7.3
+# Check your work 5.3
 
 ```
 $ cf env cglab
@@ -602,7 +635,7 @@ TIP: Use 'cf restage cglab' to ensure your changes take effect
 ```
 ---
 
-# Check your work 7.3, continued
+# Check your work 5.3, continued
  
 ```
 $ cf env cglab
@@ -618,7 +651,7 @@ System-Provided:
 
 ---
 
-# 7.4 Push the new version of our app
+# Lab 5.4 Push the new version of our app
 
 Change directory to 
 `cg-workshop/07-shared-state`
@@ -633,7 +666,7 @@ and visit your app at the random-route URL. Refresh page multiple times.
 
 ---
 
-# Check your work 7.3
+# Check your work 5.4
 
 ```
 $ cf push
@@ -655,14 +688,14 @@ routes:            cglab-gastrocnemian-calefaction.app.cloud.gov
 ```
 ---
 
-# Check your work 7.3, continued
+# Check your work 5.4, continued
 
-![fit](07-shared-state/images/running.png)
+![fit](lab07-state/images/running.png)
 
 
 ---
 
-# 7.4 Scaling
+# Lab 5.5 Scaling
 
 Create an additional app instance with 
 `cf scale cglab -i 2`
@@ -674,7 +707,7 @@ Then scale back to one with
 
 ---
 
-# Check your work 7.4 (TK)
+# Check your work 5.5 (TK)
 
 --- 
 
