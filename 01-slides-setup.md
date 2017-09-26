@@ -1,53 +1,5 @@
 <!-- 
 This deck is a separate file since it's mostly screenshots, and shouldn't be printed with the rest of the notes (at least, not at the same size)
-
-NB: These slide are inspired/influenced by https://basics-workshop.cfapps.io & https://github.com/cloudfoundry/summit-training-classes
-
-Notes from dry-run:
-
-- Everyone is focussed at the start of a lab. Deliver content then. Don't try to explain concept while students are trying to get things to work
-- Then do lab. Pause for each command to complete. Those who don't need your guidance will pull ahead. Those who do need your guidance will want to go at a real-time pace
-- Eliminate all editing
-- Eliminate all `cd`. All commands should work even if steps are done out of order
-- Be explicit about workspace setup.
-  - What directory you're using: $HOME/cg-workshop 
-  - Download `cg-workshop.zip` and unpack to ~/cg-workshop
-  - Screen: 
-    - One window terminal/powershell
-    - One window live presentation
-    - One window workshop.mda
-
-- Explain goals of workshop:
-  - Not training
-  - Enough CG that you can use your sandbox workspace effectively
-  - Enough CG that you can understand how the pieces fit together
-  - Enough CG that you have confidence in it meeting your needs
-
-- Add: Clean up after yourself!
-
-- Add Gifs of the passcode login process w/ ScreenCastr
-
-# Presenter: 
-
-- Keycastr?
-- Screenflow?
-- Add break slides w/ "will be back...."
-- Add :camera: to slide that need a linger by operator
-
-
-Other notes
----
-
-Also: Fix linebreak before all commands, use different font color for commands
-
-Everyone should go to https://dashboard.fr.cloud.gov before commandline install
-
-Todo: Insert slides/gif showing passcode login....
-
-  DW copies the api url into the browser, so need to clarify there. Perhaps show a GIF of the process.
-
-After cf login, run `cf orgs`
-
 -->
 
 # Why a workshop?
@@ -57,8 +9,11 @@ After cf login, run `cf orgs`
   - Architecture
 - Not a training course, an appetizer
   - Enough that you could use a _sandbox_
-- Enough cloud.gov that you can ask:
-  - More questions!
+- Enough cloud.gov 
+  - thay you'll ask more questions, and
+  - that you'll pursue for _your_ agency
+
+^ This section takes about 10m, then 5m to wait for most of the participants to reach the dashboard
 
 ---
 
@@ -66,8 +21,7 @@ After cf login, run `cf orgs`
 # I want some hints on logistics 
 # So that I can participate in the workshop
 
-^ We're not printing these slides since mostly screenshots
-^ User Stories FTW!
+^ We're not printing these slides since mostly screenshots. User Stories FTW! Once we complete the static website lab we'll take a ten-minute break, and get some guidannce to those who are having trouble, since this is the part of the morning with the most _variance_
 
 ---
 
@@ -75,8 +29,8 @@ Have visible:
 - The `powershell` (Windows), 
    `iterm`(Mac) or `terminal` (Mac) window
 - The webpage with YouTube Live
-- The webpage with [lab notes](https://github.com/18F/cg-workshop/blob/master/02-slides-lab.md)
-
+- The webpage with [lab notes](https://github.com/18F/cg-workshop/blob/master/01-slides-setup.md)
+  [https://github.com/18F/cg-workshop/blob/master/01-slides-setup.md](https://github.com/18F/cg-workshop/blob/master/01-slides-setup.md) 
 See next page for example
 
 ---
@@ -88,23 +42,20 @@ See next page for example
 If you're using an Amazon Workspace
 - Use your local browser for YouTube, Notes
 - Don't use the webclient, unless you must
-- Set up `powershell` as in the following video
+- Set up your Workspace and `powershell` as in the following video
 
 ---
 
-Video of setting up Amazon Workspace
+_Video of setting up Amazon Workspace TK_
 
----
-
-Image TKTK
-
----
-
+^ This starts from getting your invitation. Note that native client is preferred, this video shows the web client. The password is different from any other password you're setting up/using today. This just shows one way to get your computer set up for the workshop. Play and continue
 
 ---
 
 # I want a _cloud.gov account_
 # So that I can use _cloud.gov_
+
+^ At this point you have your computer set up with browser windows and a terminal or powershell window.
 
 ---
 
@@ -203,9 +154,12 @@ Google Authenticator or Microsoft Authenticator or Authy
 
 ![fit](lab01-setup/images/AUTH-z4.PNG)
 
+
 ---
 
 ![fit](lab01-setup/images/06_01.png)
+
+^ TK: This may need another slide for first entry of token code
 
 ---
 
@@ -221,13 +175,7 @@ Google Authenticator or Microsoft Authenticator or Authy
 
 ---
 
-<!-- 
-![](lab01-setup/images/10.png)
-
----
--->
-
-# Future logins to, e.g. _https://dashboard.fr.cloud.gov_
+# Future _cloud.gov_ logins to, e.g. _https://dashboard.fr.cloud.gov_
 
 ![inline](lab01-setup/images/login01.png) ![inline](lab01-setup/images/login02.png) 
 
@@ -243,7 +191,10 @@ Google Authenticator or Microsoft Authenticator or Authy
 
 # Further exploration
 
-While we pause until most folks are on [https://dashboard.fr.cloud.gov](https://dashboard.fr.cloud.gov):
+When you have reached the [_dashboard_](https://dashboard.fr.cloud.gov),
+[https://dashboard.fr.cloud.gov](https://dashboard.fr.cloud.gov), you have completed this section. 
+
+Meanwhile:
 
 * try exploring the other features of the dashboard
 * review the docs at [https://cloud.gov/docs](https://cloud.gov/docs/)
@@ -251,3 +202,11 @@ While we pause until most folks are on [https://dashboard.fr.cloud.gov](https://
   at [https://before-you-ship.18f.gov](https://before-you-ship.18f.gov/)
 
 ^ Wait here until 75% of participants are set up.
+
+---
+
+# Continue...
+
+... to [Lab part II](https://github.com/18F/cg-workshop/blob/master/02-slides-lab.md):
+
+[https://github.com/18F/cg-workshop/blob/master/02-slides-lab.md](https://github.com/18F/cg-workshop/blob/master/02-slides-lab.md)
