@@ -126,7 +126,7 @@ Try the following:
 * `cf help`: Explore other commands
 * `cf curl "/v2/spaces"`: Peek into the API internals[^1]
 
-[^1]: This is peek at the guru-level view of Cloud Foundry. You'll not need this anytime soon.
+[^1]: This is a peek at the guru-level view of Cloud Foundry. You'll not need this anytime soon.
 
 ---
 
@@ -148,23 +148,30 @@ Our simplest example. We'll use `cf push` to send the files to cloud.gov, and it
 
 ---
 
-# 3.1: Download labs
+# 3.1: Download labs 
 
-# FIXME -- all usg iwr or curl or wget of the zip file. 
+Mac/Linux shell:
 
-**If you have `git` installed**, run: 
-
+```shell
+cd $HOME
+curl -Lo cgw.zip http://bit.ly/cgw-zip
+unzip cgw.zip
+cd cg-workshop-master
 ```
-git clone https://github.com/18F/cg-workshop.git
-cd cg-workshop
+
+Windows Powershell:
+
+```powershell
+cd $HOME
+iwr -o cgw.zip https://bit.ly/cgw-zip
+7z x cgz.zip   # If no 7zip, use File Explorer to unpack
+cd cg-workshop-master
 ```
 
-**Otherwise**, visit https://github.com/18F/cg-workshop, click the green `Clone or download` button, then 
-`Download ZIP`. 
 
-Unzip the downloaded <br>`cg-workshop-master.zip` and then `cd cg-workshop-master`
-
-![right,fit](images/cg-workshop-git.png)
+<!-- 
+https://codingbee.net/tutorials/powershell/powershell-make-a-permanent-change-to-the-path-environment-variable
+-->
 
 ---
 
@@ -173,25 +180,22 @@ Unzip the downloaded <br>`cg-workshop-master.zip` and then `cd cg-workshop-maste
 Run `ls`. You should see output similar to the following:
 
 ```powershell
-> ls
+PS D:\Users\cao.burkholder\cg-workshop-master> ls
 
 
-    Directory: /Users/peterburkholder/Projects/18f/cg-workshop
+    Directory: D:\Users\cao.burkholder\cg-workshop-master
 
 
 Mode                LastWriteTime         Length Name
 ----                -------------         ------ ----
-d-----          9/20/17   2:46 PM                00_task_setup
-d-----          9/18/17   8:51 PM                01_task_static
-d-----          9/18/17   9:26 PM                02_task_sinatra
-d-----          9/20/17   4:19 PM                images
-------          7/28/17  10:50 AM           1344 LICENSE.md
-------          9/19/17   4:37 PM          13358 pitch.md
-------          9/19/17   4:46 PM           3863 README.md
-------          9/20/17  12:46 PM           4293 requirements.md
-------          9/20/17  10:35 AM            810 tts.md
-------          9/20/17   4:01 PM           1299 workshop_00.md
-------          9/20/17   4:23 PM           5285 workshop.md
+d-----        9/25/2017   9:13 PM                03_static_site
+d-----        9/25/2017   9:13 PM                04_webapp
+d-----        9/25/2017   9:13 PM                07-shared-state
+d-----        9/25/2017   9:13 PM                admin
+d-----        9/25/2017   9:13 PM                images
+d-----        9/25/2017   9:13 PM                lab01-setup
+------        9/25/2017   9:13 PM             47 .gitignore
+------        9/25/2017   9:13 PM          13225 00-slides-cloudgov.md
 ```
 
 ---
