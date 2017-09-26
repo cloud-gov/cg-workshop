@@ -1,0 +1,6 @@
+---
+applications:
+- name: cglab
+  random-route: true
+  memory: 64m
+  # buildpack: ruby_buildpack
