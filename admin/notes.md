@@ -38,3 +38,9 @@ Todo: Insert slides/gif showing passcode login....
   DW copies the api url into the browser, so need to clarify there. Perhaps show a GIF of the process.
 
 After cf login, run `cf orgs`
+
+
+# Workspaces
+
+In addition to installing `vscode` `git` `cf` I updated the path to include `cf:\Program Files\7zip` following https://codingbee.net/tutorials/powershell/powershell-make-a-permanent-change-to-the-path-environment-variable
+

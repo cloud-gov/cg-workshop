@@ -1,0 +1,5 @@
+---
+applications:
+- memory: 16m
+  disk_quota: 32m
+  path: .

@@ -3,6 +3,8 @@
 # I want to have a _command line utility_ installed
 # So that I can _deploy apps into cloud.gov_
 
+^ We have our login, now how do we run stuff? With a CLI
+
 ---
 
 # Why the `cf` CLI?
@@ -13,7 +15,7 @@ The Cloud Foundry command-line interface (CLI) is a multiplatform binary written
 * Collaboration
 * Corroboration
 
-^ You can put commands into files, with variable, and then run them. You can share code by viewing text files, or even copy/paste, in ways you can't with GUIs. And with version control you can corroborate that the change you mean to make is the change expressed by the code.
+^ You can put commands into files, with variables, and then run them. You can share code by viewing text files, or even copy/paste, in ways you can't with GUIs (nb: skip Snover anecdote). And with version control you can corroborate that the change you mean to make is the change expressed by the code.
 
 ---
 
@@ -32,6 +34,8 @@ On Macs, with Homebrew, you can use:
 
 On Workspaces, `cf` CLI is already installed.
 
+^ I have not shown the Installer steps as they're different for different systems, and should be familiar to you at this point.
+
 ---
 
 # 2.1 continued...
@@ -43,6 +47,8 @@ After the installer has finished, run the command:
 ``` 
 
 and you should see a list of command options.
+
+^ When you have CF installed and working as on the next slide, we'll continue with authenticating your CLI to your _cloud.gov_ account.
 
 ---
 
@@ -62,71 +68,62 @@ Before getting started:
 ... [snip] ...
 ```
 
+^ Instructor: wait here until most partipants have CF installed.
+
 ---
 
 # 2.2 Login to cloud.gov with the _cf_ CLI
 
-Try the built-in help:
+You'll enter the command below, and you'll be directed to an _authentication URL_. 
 
-```sh
-cf login --help
+```powershell
+cf login --sso -a https://api.fr.cloud.gov
 ```
 
-Then, login:
+Confirm you're logged in by seeing the _orgs_ you belong to:
 
-```sh
-cf login --sso -a https://api.fr.cloud.gov
+```powershell
+cf orgs
 ```
 
 ---
 
 # Check your work 2.2
 
-You should see output similar to the following:
-
-```
-> cf login --help
-NAME:
-   login - Log user in
-
-USAGE:
-   cf login [-a API_URL] [-u USERNAME] [-p PASSWORD] [-o ORG] [--sso PASSCODE]
-... [snip] ...
-```
-
-[.footer: continued ...]
-
----
-
-# Check your work 2.2, continued
-
 ```
 > cf login --sso -a https://api.fr.cloud.gov
 API endpoint: https://api.fr.cloud.gov
 
 One Time Code ( Get one at https://login.fr.cloud.gov/passcode )>
-Authenticating...
-OK
+```
 
-Targeted org sandbox-cao
-Targeted space peter.burkholder
-API endpoint:   https://api.fr.cloud.gov (API version: 2.95.0)
-User:           peter.burkholder@cao.gov
-Org:            sandbox-cao
-Space:          peter.burkholder
+Visit the URL [https://login.fr.cloud.gov/passcode](https://login.fr.cloud.gov/passcode), complete the login to _cloud.gov_, and you'll get a one-time passcode. Copy/paste the passcode back into the CLI, as show [in this video](TKTK).
+
+---
+
+# Check your work 2.2, continued
+
+```powershell
+> cf orgs
+Getting orgs as peter.burkholder@cao.gov...
+
+name
+sandbox-cao
 ```
 
 ---
 
 # Further exploration
 
-Try the following:
+Once you have `cf orgs` working, try the following:
 
 * `cf logoug`: Auto-suggest on _misspellings_
 * `cf help`: Explore other commands
 * `cf curl "/v2/spaces"`: Peek into the API internals[^1]
 
 [^1]: This is a peek at the guru-level view of Cloud Foundry. You'll not need this anytime soon.
+
+^Instructor: Wait here until most folks have `cf orgs` working
 
 ---
 
@@ -135,7 +132,6 @@ Try the following:
 
 ---
 
-
 # 3 Static website
 
 Our simplest example. We'll use `cf push` to send the files to cloud.gov, and it'll package the site and start to serive it.
@@ -143,8 +139,9 @@ Our simplest example. We'll use `cf push` to send the files to cloud.gov, and it
 
 ---
 
-# Lab 3: Download workshop labs and deploy a static website to YOURNAME.app.cloud.gov
+# Lab 3: Download _workshop labs_ and deploy a _static website_ to _yourname_.app.cloud.gov
 
+^ We have working environment, a cloud.gov account, a working `cf` connection to the cloud.gov account. Now we need to materials for the rest of our labs. Then we can release a website.
 
 ---
 
@@ -168,11 +165,6 @@ iwr -o cgw.zip https://bit.ly/cgw-zip
 cd cg-workshop-master
 ```
 
-
-<!-- 
-https://codingbee.net/tutorials/powershell/powershell-make-a-permanent-change-to-the-path-environment-variable
--->
-
 ---
 
 # Check your work 3.1
@@ -182,18 +174,14 @@ Run `ls`. You should see output similar to the following:
 ```powershell
 PS D:\Users\cao.burkholder\cg-workshop-master> ls
 
-
     Directory: D:\Users\cao.burkholder\cg-workshop-master
-
 
 Mode                LastWriteTime         Length Name
 ----                -------------         ------ ----
-d-----        9/25/2017   9:13 PM                03_static_site
-d-----        9/25/2017   9:13 PM                04_webapp
-d-----        9/25/2017   9:13 PM                07-shared-state
 d-----        9/25/2017   9:13 PM                admin
 d-----        9/25/2017   9:13 PM                images
 d-----        9/25/2017   9:13 PM                lab01-setup
+d-----        9/25/2017   9:13 PM                lab03-site
 ------        9/25/2017   9:13 PM             47 .gitignore
 ------        9/25/2017   9:13 PM          13225 00-slides-cloudgov.md
 ```
@@ -203,35 +191,52 @@ d-----        9/25/2017   9:13 PM                lab01-setup
 
 # Lab 3.2: Deploy static website
 
-Don't literally use `myfname-lname` below. Use your own name like, `jane-doe`:
+Don't literally use _myfname-lname_ below. Use your own name like, _jane-doe_:
 
 ```
-cd 03_static_site
-cf push myfname-lname
+cf push -f lab03-site/manifest.yml myfname-lname
 ```
+
+---
+
+[.build-lists: true]
+# What happens when I _cf push_? (v1.0)
+
+
+* Upload: Files are sent to CF for new app _myfname-lname_
+  * The `-f lab-03-site/manifest.yml` is a _deployment manifest_
+* Staging: Artifact is created (droplet)
+* Running: 
+  * A _route_ is created to the app
+  * Site starts on an web host
+  * Site serves web requests 
+
+---
+
+![](images/app_push_flow_diagram_diego.png)
 
 ---
 
 # Check your work 3.2
 
-The `cf push` should results should resemble:
+The `cf push` results should resemble:
 
-```powershell
-> cf push
-> cf push peter.burkholder
-Creating app peter.burkholder in org sandbox-cao ...
+```
+$ cf push -p lab03-site/ peter-burkholder
+Creating app peter-burkholder in org s-cao / space p.burk...
 OK
+Uploading peter-burkholder...
 ... [snip]...
-requested state: started
+rrequested state: started
 instances: 1/1
-usage: 512M x 1 instances
-urls: peterburkholder.app.cloud.gov
-last uploaded: Thu Sep 21 01:02:16 UTC 2017
+usage: 16M x 1 instances
+urls: peter-burkholder.app.cloud.gov
+last uploaded: Tue Sep 26 14:27:12 UTC 2017
 stack: cflinuxfs2
 buildpack: staticfile
 
-     state     since                    cpu    memory      disk      details
-#0   running   2017-09-20 09:02:32 PM   0.0%   0 of 512M   0 of 1G
+     state     since                    cpu    memory        disk          details
+#0   running   2017-09-26 10:27:29 AM   0.0%   3.9M of 16M   6.2M of 32M
 ```
 
 [.footer: continued...]
@@ -261,34 +266,21 @@ E.g.:
   <h1>Hello from cloud.gov</h1>
 </body/
 ```
----
-
-
-[.build-lists: true]
-# What happens when I _cf push_? (v1.0)
-
-* Upload: Files sent to CF
-* Staging: Artifact is created (droplet)
-* Running: Site starts on an web host
-
-Site receives web requests 
-
----
-
-![](images/app_push_flow_diagram_diego.png)
 
 ---
 
 # Further exploration
 
-Try the following:
+When you can access your site, try the following:
 
+* Try HTTP, e.g., `http://myfname-lname.app.cloud.gov`
+  * Does it work? Is it secured?
 * `cf app myfname-lname`
-  - info about your app
-* `cf push myfname-name --random-route`
-  - same app, diff url
-* `CF_TRACE=true cf push myfname-lname`
-  - get detailed logs
+  * What info do you get about your app
+* `cf push -f lab03-site/manifest.yml myfname-lname --random-route`
+  * What URL do you use now?
+
+^ Instructor: Wait here for most participants to reach their static page.
 
 ---
 
