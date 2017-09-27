@@ -1,4 +1,5 @@
-<!-- Start with workshop_00.md -->
+slidenumbers: true
+footer: [https://github.com/18F/cg-workshop](https://github.com/18F/cg-workshop) 02-slides-lab.md
 
 # I want to have a _command line utility_ installed
 # So that I can _deploy apps into cloud.gov_

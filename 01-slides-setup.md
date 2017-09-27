@@ -1,3 +1,5 @@
+slidenumbers: true
+footer: [https://github.com/18F/cg-workshop](https://github.com/18F/cg-workshop) 01-slides-setup.md
 <!-- 
 This deck is a separate file since it's mostly screenshots, and shouldn't be printed with the rest of the notes (at least, not at the same size)
 -->
@@ -29,7 +31,7 @@ Have visible:
 - The `powershell` (Windows), 
    `iterm`(Mac) or `terminal` (Mac) window
 - The webpage with YouTube Live
-- The webpage with [lab notes](https://github.com/18F/cg-workshop/blob/master/01-slides-setup.md)
+- The webpage with [lab notes](https://github.com/18F/cg-workshop/)
   [https://github.com/18F/cg-workshop/blob/master/01-slides-setup.md](https://github.com/18F/cg-workshop/blob/master/01-slides-setup.md) 
 See next page for example
 
