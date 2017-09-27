@@ -106,6 +106,7 @@ Visit the URL [https://login.fr.cloud.gov/passcode](https://login.fr.cloud.gov/p
 
 ![](https://s3-us-gov-west-1.amazonaws.com/cg-public/cg-otp-login-fast.mp4)
 
+^ View login video at https://s3-us-gov-west-1.amazonaws.com/cg-public/cg-otp-login-fast.mp4
 
 ---
 
@@ -125,8 +126,9 @@ sandbox-cao
 
 Once you have `cf orgs` working, try the following:
 
-* `cf logoug`: Auto-suggest on _misspellings_
+* `cf serviecs`: Auto-suggest on _misspellings_
 * `cf help`: Explore other commands
+  * `cf routes -h`: Explore _modal help_ for commands
 * `cf curl "/v2/spaces"`: Peek into the API internals[^1]
 
 [^1]: This is a peek at the guru-level view of Cloud Foundry. You'll not need this anytime soon.
@@ -187,8 +189,9 @@ d-----        9/25/2017   9:13 PM                admin
 d-----        9/25/2017   9:13 PM                images
 d-----        9/25/2017   9:13 PM                lab01-setup
 d-----        9/25/2017   9:13 PM                lab03-site
-------        9/25/2017   9:13 PM             47 .gitignore
-------        9/25/2017   9:13 PM          13225 00-slides-cloudgov.md
+d-----        9/26/2017  10:49 PM                lab04-app
+d-----        9/26/2017  10:49 PM                lab05-state
+...
 ```
 
 ---
@@ -255,23 +258,18 @@ buildpack: staticfile
 
 # Check your work 3.2, continued
 
-Now try accessing your site:
-
-```powershell
-# powershell
-iwr https://myfname-lname.app.cloud.gov
-# or shell
-curl https://myfname-lname.app.cloud.gov
-# or mac
-open https://myfname-lname.app.cloud.gov
-```
 ![right,fit](images/hello-cloud-gov.png)
 
+Now try accessing your site at 
 
-E.g.: 
+https://fname-lname.app.cloud.gov
+
+<br>
+<br>
+(If you care to try from command line...):
 
 ```powershell
-> curl https://peterburkholder.app.cloud.gov
+> curl https://fname-lname.app.cloud.gov
 <body>
   <h1>Hello from cloud.gov</h1>
 </body/
@@ -286,8 +284,8 @@ When you can access your site, try the following:
 * Try HTTP, e.g., `http://myfname-lname.app.cloud.gov`
   * Does it work? Is it secured?
 * `cf app myfname-lname`
-  * What info do you get about your app
-* `cf push -f lab03-site/manifest.yml myfname-lname --random-route`
+  * What info do you get about your app?
+* `cf push -f lab03-site/manifest.yml --random-route myfname-lname`
   * What URL do you use now?
 
 ^ Instructor: Wait here for most participants to reach their static page.
@@ -345,9 +343,9 @@ App Files + Runtime Dependencies = App Artifact (droplet)
 
 # Apps are started on specialized VMs called cells
 
-If it’s a web process, it binds to a TCP port
-Instances are distributed across multiple cells
-Router distributes traffic across instances
+If it’s a web process, it binds to a TCP port.
+Instances are distributed across multiple cells.
+The Router distributes traffic across instances.
 
 ^A couple points about how CF pulls things together  <br>If you look at the labs04-app/Gemfile you'll see a lot of dependencies that the buildpack handles. Buildpacks can be used so there are no online dependencies in your application push.  <br>The apps run in container instances that can be migrated between cells for resource management and uptime.
 
@@ -422,8 +420,8 @@ cf push -f lab04-app/manifest.yml cglab
 The cf push results should resemble those below. Note all the buildpacks (and use of buildpack detection)
 
 ```powershell, [.highlight: 9]
-$ cf push
-Using manifest file cg-workshop/04_webapp/manifest.yml
+$ cf push -f lab04-app/manifest.yml cglab
+Using manifest file lab04-app/manifest.yml cglab
 ... [snip] ...
 Starting app cglab in org sandbox-cao / space peter.burkholder as peter.burkholder@cao.gov...
 Downloading nodejs_buildpack...
@@ -691,7 +689,25 @@ Visit your app at the URL. Refresh page multiple times. What does the app do?
 # Check your work 5.4
 
 ```
-> cf push
+> cf push cglab -f lab05-state/manifest.yml
+Using manifest file lab05-state/manifest.yml
+
+Updating app cglab in org sandbox-cao / space peter.burkholder 
+OK
+
+Uploading cglab...
+...
+requested state: started
+instances: 1/1
+usage: 64M x 1 instances
+urls: cglab-gastrocnemian-calefaction.app.cloud.gov
+last uploaded: Wed Sep 27 03:24:38 UTC 2017
+stack: cflinuxfs2
+buildpack: ruby_buildpack
+
+     state     since                    cpu    memory        disk        
+#0   running   2017-09-26 11:25:11 PM   0.0%   980K of 64M   1.5M of 128M
+PS D:\Users\cao.burkholder\cg-workshop-master>
 ```
 
 ---
@@ -718,7 +734,17 @@ How long until a new instance was available?
 
 ---
 
-# Check your work 5.5 (TK)
+# Check your work 5.5 
+
+Scaling output should resemble:
+
+```
+> cf scale cglab -i 2
+Scaling app cglab in org sandbox-cao / space p.burkholder as ...
+OK
+```
+
+^ I observe about 10 seconds for new instance to come up
 
 --- 
 
@@ -794,7 +820,37 @@ Once you've seen the app count visits per scaled instance:
 
 ---
 
-# 8 Clean UP
+# 8 Clean Up
+
+
+
+```
+> cf apps
+Getting apps in org sandbox-cao / space peter.burkholder as peter.burkholder@cao.gov...
+OK
+
+name               requested state   instances   urls
+peter-burkholder   started           1/1         peter-burkholder.app.cloud.gov
+cglab              started           1/1         cglab-gastro-fact.app.cloud.gov
+```
+
+```
+> cf delete cglab
+> cf delete myfname-lname # use the real app name
+```
+
+```
+> cf delete-service cg-lab redis
+> cf delete-orphaned-routes
+```
+
+All of these should show nothing:
+
+```
+> cf apps
+> cf services
+> cf routes
+```
 
 ---
 
@@ -806,15 +862,27 @@ Once you've seen the app count visits per scaled instance:
 |:--- | :--- |
 | cloud.gov docs: [https://cloud.gov/docs/](https://cloud.gov/docs/)| Cloud Foundry docs: [https://docs.cloudfoundry.org](https://docs.cloudfoundry.org) |
 
-| Books |  |
-| ----  | --- | 
+| Books |   |
+|:----  | --- | 
 | Cloud Foundry: The Definitive Guide: <br>Develop, Deploy, and Scale (2017, O'Reilly) | Cloud Foundry eBooks: <br>[https://content.pivotal.io/ebooks](https://content.pivotal.io/ebooks) |
 
 
-| Courses |  |
-|---- |---| 
+| Courses |   |
+|:---- |---| 
 | edX Course: [https://edx.org](https://courses.edx.org/courses/course-v1:LinuxFoundationX+LFS132x+1T2017/course/) | CloudFoundry training materials: <br>[https://basics-workshop.cfapps.io](https://basics-workshop.cfapps.io) | 
 
-| Other |  |
-|---- |---| 
+| Other |   |
+|:---- |---| 
+| Inquires: [cloud-gov-inquiries@gsa.gov](mailto:cloud-gov-inquiries@gsa.gov) | Twitter: @18F |
+
+---
+
+| Docs   |   |
+|:--- | :--- |
+| cloud.gov docs: [https://cloud.gov/docs/](https://cloud.gov/docs/)| Cloud Foundry docs: [https://docs.cloudfoundry.org](https://docs.cloudfoundry.org) |
+| **Books** |   |
+| Cloud Foundry: The Definitive Guide: <br>Develop, Deploy, and Scale (2017, O'Reilly) | Cloud Foundry eBooks: <br>[https://content.pivotal.io/ebooks](https://content.pivotal.io/ebooks) |
+| **Courses** |   |
+| edX Course: [https://edx.org](https://courses.edx.org/courses/course-v1:LinuxFoundationX+LFS132x+1T2017/course/) | CloudFoundry training materials: <br>[https://basics-workshop.cfapps.io](https://basics-workshop.cfapps.io) | 
+| **Other** |   |
 | Inquires: [cloud-gov-inquiries@gsa.gov](mailto:cloud-gov-inquiries@gsa.gov) | Twitter: @18F |

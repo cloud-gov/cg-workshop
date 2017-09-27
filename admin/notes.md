@@ -53,3 +53,36 @@ for movie in Workspaces.mp4 cg-otp-login*; do
   aws s3 cp $movie s3://cg-public --acl public-read
 done
 ```
+
+# For some other time:
+
+---
+
+1. Access control -Demo only, skip if short on time.
+  * `cf orgs`
+  * `cf spaces`
+  * Discussion / Demo only
+  * Accomplished: 
+    * Inbound access control w/ oauth - 
+    * Egress to external providers by fixed IP
+
+---
+
+# YAGNI
+
+1. Blue-green releases
+  * Autopilot
+1. Optional: Worker apps
+  * See Aidan's notes for a good write-up
+1. Development tips
+  * `cf local`
+
+---
+
+# Closing: The 12-factor App
+
+---
+
+# Parking lot
+
+- health checks
