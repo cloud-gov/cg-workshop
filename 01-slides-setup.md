@@ -150,18 +150,16 @@ Google Authenticator or Microsoft Authenticator or Authy
 ---
 
 ![fit,left](lab01-setup/images/AUTH-z3.PNG)
-![fit,right](lab01-setup/images/06.PNG)
+![fit,right](lab01-setup/images/06.png)
 
 ---
 
-![fit](lab01-setup/images/AUTH-z4.PNG)
-
+![fit,left](lab01-setup/images/AUTH-z4.PNG)
+![fit,right](lab01-setup/images/06_01.png)
 
 ---
 
-![fit](lab01-setup/images/06_01.png)
-
-^ TK: This may need another slide for first entry of token code
+![fit](lab01-setup/images/06_02.png)
 
 ---
 
