@@ -1,5 +1,7 @@
 slidenumbers: true
+theme: work,7
 footer: [https://github.com/18F/cg-workshop](https://github.com/18F/cg-workshop) 02-slides-lab.md
+![](images/cloud-gov-event.png)
 
 # I want to have a _command line utility_ installed
 # So that I can _deploy apps into cloud.gov_
@@ -10,14 +12,13 @@ footer: [https://github.com/18F/cg-workshop](https://github.com/18F/cg-workshop)
 
 # Why the `cf` CLI?
 
-The Cloud Foundry command-line interface (CLI) is a multiplatform binary written in `Go` to interact with the _CF API_.  The CLI provides:
+The Cloud Foundry (_CF_) command-line interface (CLI) is a multiplatform binary written in `Go` to interact with the _CF API_.  The CLI provides:
 
 * Automation
 * Collaboration
 * Corroboration
 
 ^ You can put commands into files, with variables, and then run them.<br> You can share code by viewing text files, or even copy/paste, in ways you can't with GUIs (nb: skip Snover anecdote). <br> And with version control you can corroborate that the change you mean to make is the change expressed by the code. <br> With the dashboard we provide overview tools and roles/permissions since those may be needed by project managers how are not using the CLI day-by-day
-
 
 ---
 
@@ -137,6 +138,8 @@ Once you have `cf orgs` working, try the following:
 ^Instructor: Wait here until most folks have `cf orgs` working
 
 ---
+
+![](images/cloud-gov-event.png)
 
 # I want my website to be _accessible at a public URL_
 # So that the _American people_ can read it
@@ -293,18 +296,25 @@ When you can access your site, try the following:
 
 ---
 
+![](images/cloud-gov-event.png)
+
 # BREAK 
 
-We'll break here so folks can catch up with:
+We'll break so folks can catch up with:
 
 * workstation setup
-* account creation - can you login to:   [https://dashboard.fr.cloud.gov](https://dashboard.fr.cloud.gov)?
-* CLI install - can you run:   `   cf   `   ?
-* labs download - can you:   ```    cd $HOME/cg-workshop-master   ```   ?
+* account creation - can you login to:
+   [https://dashboard.fr.cloud.gov](https://dashboard.fr.cloud.gov)?
+* CLI install - can you run?
+   `   cf   ` 
+* labs download - can you ?
+  ```    cd $HOME/cg-workshop-master   ```   
 
 You can skip doing _cf push_ as we'll pick up from there in the next section.
 
 ---
+
+![](images/cloud-gov-event.png)
 
 # I want to run a _dynamic webapp_
 # So that users can _interact_ with us
@@ -515,7 +525,9 @@ Once you've visited your app and viewed `cf app cglab`, try the following:
 
 ---
 
-# I want to store data in a service
+![](images/cloud-gov-event.png)
+
+# I want to store data in a _service_
 # So that it is persistent and shared
 
 ---
@@ -673,9 +685,7 @@ System-Provided:
 
 # Lab 5.4 Push the new version of our app
 
-Now we can push the version of the app that uses the data store:
-
-Run:
+Now we can push the version of the app that uses the data store. Run:
 
 ```
    cf push cglab -f lab05-state/manifest.yml
@@ -689,7 +699,7 @@ Visit your app at the URL. Refresh page multiple times. What does the app do?
 
 # Check your work 5.4
 
-```
+``` [.highlight: 1, 12, 17,18]
 > cf push cglab -f lab05-state/manifest.yml
 Using manifest file lab05-state/manifest.yml
 
@@ -708,14 +718,13 @@ buildpack: ruby_buildpack
 
      state     since                    cpu    memory        disk        
 #0   running   2017-09-26 11:25:11 PM   0.0%   980K of 64M   1.5M of 128M
-PS D:\Users\cao.burkholder\cg-workshop-master>
 ```
 
 ---
 
 # Check your work 5.4, continued
 
-![fit](lab05-state/images/running.png)
+![fit,right](lab05-state/images/running.png)
 
 ---
 
@@ -723,29 +732,28 @@ PS D:\Users\cao.burkholder\cg-workshop-master>
 
 Since CF stores executable artifacts and runs them in containers, you can quickly _scale_ your app to meet demand.
 
-Scale _cglab_ to two instances:
+Scale _cglab_ to two instances, then immediately, refresh the _cglab_ webapp page multiple times
 
 ```
    cf scale cglab -i 2
 ```
 
-Immediately, refresh the _cglab_ webapp page multiple times.
-
 How long until a new instance was available?
 
 ---
 
+![right,fit](lab05-state/images/scale.png)
 # Check your work 5.5 
 
 Scaling output should resemble:
 
 ```
 > cf scale cglab -i 2
-Scaling app cglab in org sandbox-cao / space p.burkholder as ...
+Scaling app cglab in org sandbox-cao 
 OK
 ```
 
-^ I observe about 10 seconds for new instance to come up
+About 10 seconds for new instance to come up
 
 --- 
 
@@ -776,7 +784,8 @@ OK
 
 Once you've seen the app count visits per scaled instance:
 
-* Go to your app's URL + '/env": http://cglab....app.cloud.gov/env[^2]
+* Go to your app's URL + '/env'[^2]. E.g.
+http://cglab....app.cloud.gov/env
 * Can you use `cf set-env` to add new variables?
   * Hint: You'll need `cf restage` for your app to pick them up.
 * Try scaling the app to four, then back to two. Which instances are kept?
@@ -785,6 +794,9 @@ Once you've seen the app count visits per scaled instance:
 [^2]: These environment variables are deliberately exposed by the app for demonstration purposes. You would never have this feature in any _real_ app.
 
 ---
+
+
+![](images/cloud-gov-event.png)
 
 # I want to know what my app is _doing_
 # So that I can _debug_ it
@@ -876,13 +888,13 @@ time                          event                      actor          descript
 2017-09-26T23:24:46.00-0400   audit.app.update           p...@cao.gov   state: STARTED
 ```
 
-You should see any CRASH events, unless you're app had too little memory
+You shouldn't see any CRASH events
 
 ---
 
 # Lab 6.4: SSH to debug _cglab_
 
-Connect to your _cglab_ application[^2]
+Connect to your _cglab_ application[^3]
 
 ```
    cf ssh cglab
@@ -894,7 +906,7 @@ You'll be connected a Linux container. To see all processes, run the command bel
    ps -ef
 ```
 
-[^2]: `cf ssh` uses port 2222. If port 2222 is blocked, you'll get a connection error
+[^3]: `cf ssh` uses port 2222. If port 2222 is blocked, you'll get a connection error
 
 ---
 
@@ -923,79 +935,164 @@ About 7 or 8 processes running. To end a session, run:
 
 # Further exploration, Lab 6
 
-Once you've seen _logs_, _events_ and connected over _ssh_, try:
+Once you've seen _logs_, _events_ and used _ssh_, try:
 
-* Induce crashes by pushing your app with insufficient memory
-  * What do events and logs show? How do you fix?
-* Use built-in help to find a command to disable SSH. Try `cf help -a`
-* View current cloud.gov status at [https://cloudgov.statuspage.io](https://cloudgov.statuspage.io)
-
-
-
-  * Platform availability: 
-  `cf events cglab`
-  * Logs:
-  `cf logs cglab`
-  `cf logs --recent cglab`
-  * Live instance degbugging: 
-  `cf ssh cglab`
-  * [https://cloudgov.statuspage.io](https://cloudgov.statuspage.io)
-  * [https://logs.fr.cloud.gov](https://logs.fr.cloud.gov)
+* Maintenance: Your app may need a new version of Ruby/Java/etc. You can update a Buildpack with:<br>   `cf restage cglab`
+* Use built-in help to find ways to disable SSH. Try <br>   `cf help -a`
+* View cloud.gov status: [https://cloudgov.statuspage.io](https://cloudgov.statuspage.io)
 
 ---
+
+![](images/cloud-gov-event.png)
 
 # I want to test and release app code continually
 # so that we can attain velocity, reliability and security
 
 ---
 
-# 7. Continuous Integration and Delivery (Demo)
+# 7. Continuous Integration and Delivery
+
+(Demo as time permits)
 
 ---
 
-# I want to manage and maintain resources,
-# so I am cost-effective and secure
+![](images/cloud-gov-event.png)
+
+# I want to manage unused resources,
+# so that I am cost-effective and secure
 
 ---
 
-# 8. Maintenance and clean-up
+# Lab 8: Clean-up
+
+Unused apps and resources expend resources and may present an attack surface.
+
+We'll clean up from today with _delete_ (app), _delete-services_ and _delete-orphaned-routes_.
+
+Most of these _delete_ commands expect a _Y_ confirmation.
 
 ---
 
-  `cf restage cglab`
+# Lab 8.1: Delete apps with _cf delete_
+
+List all your apps with:
+
 ```
+   cf apps
+```
+
+Then delete each one, e.g.:
+
+```
+   cf delete cglab
+   cf delete myfname-lname # use the real app name
+```
+
+---
+
+# Check your work, 8.1
+
+``` [.highlight: 1,8,9]
 > cf apps
-Getting apps in org sandbox-cao / space peter.burkholder as peter.burkholder@cao.gov...
+Getting apps in org sandbox-cao / space peter.burkholder as peter.burkholde
+...
+name            requested   instances   memory   disk   urls
+cao-burkholder  started     1/1         16M      32M    cao-burkholder.app.
+cglab           started     2/2         64M      128M   cglab-gastro-action
+
+> cf delete cglab
+Really delete the app cglab?> y
+Deleting app cglab in org sandbox-cao / space peter.burkholder as peter.bur
+OK
+```
+
+---
+
+# Lab 8.2: Delete services 
+
+List all your services with:
+
+```
+   cf services
+```
+
+Then delete each one, e.g.:
+
+```
+   cf delete-service cglab-redis
+```
+
+---
+
+# Check your work, 8.2
+
+``` [.highlight: 1,8,9]
+> cf services
+Getting services in org sandbox-cao / space peter.burkholder as
 OK
 
-name               requested state   instances   urls
-peter-burkholder   started           1/1         peter-burkholder.app.cloud.gov
-cglab              started           1/1         cglab-gastro-fact.app.cloud.gov
-```
+name          service   plan       bound apps   last operation
+cglab-redis   redis32   standard                create succeeded
 
-```
-> cf delete cglab
-> cf delete myfname-lname # use the real app name
-```
-
-```
-> cf delete-service cg-lab redis
-> cf delete-orphaned-routes
-```
-
-All of these should show nothing:
-
-```
-> cf apps
-> cf services
-> cf routes
+> cf delete-service cglab-redis
+Really delete the service cglab-redis?> y
+Deleting service cglab-redis in org sandbox-cao / space peter.b
+OK
 ```
 
 ---
 
-# 9 The 12 factor app
+# Lab 8.3: Delete unused routes
 
+CloudFoundry automatically creates _routes_ for your web application. List your routes with:
 
+```
+   cf routes
+```
+
+Routes that no longer connect to apps are _orphaned_. Clean them all up with:
+
+```
+   cf delete-orphaned-routes
+```
+
+---
+
+# Check your work, 8.3
+
+``` [.highlight: 1,8,9]
+> cf routes
+Getting routes for org sandbox-cao / space peter.burkholder as peter.bur
+
+space              host                     domain          apps        
+peter.burkholder   peterburkho              app.cloud.gov
+peter.burkholder   cglab-gastralefaction    app.cloud.gov
+
+> cf delete-orphaned-routes
+Really delete orphaned routes? [yN]: y
+Getting routes as peter.burkholder@cao.gov ...
+
+Deleting route peterburkho.app.cloud.gov ...
+Deleting route cglab-gastrofaction.app.cloud.gov ...
+OK
+```
+
+---
+
+![](images/cloud-gov-event.png)
+
+# Congratulations!
+
+All of these should show no active resources:
+
+```
+   cf apps
+   cf services
+   cf routes
+```
+
+You have completed the workshop 
+and tidied up after yourself!
 
 ---
 
