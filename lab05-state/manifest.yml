@@ -2,7 +2,7 @@
 applications:
 - name: cglab
   memory: 64m
-  disk-quota: 128m
-  random-route: true
+  disk_quota: 128m
+  random-route: false
   path: .
   buildpack: ruby_buildpack

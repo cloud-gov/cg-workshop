@@ -1,5 +1,4 @@
 .DS_Store
 vendor/
 .bundle/
-99_state_uswds
-99*/
+stress.md

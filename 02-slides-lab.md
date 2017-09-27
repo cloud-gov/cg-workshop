@@ -98,7 +98,14 @@ API endpoint: https://api.fr.cloud.gov
 One Time Code ( Get one at https://login.fr.cloud.gov/passcode )>
 ```
 
-Visit the URL [https://login.fr.cloud.gov/passcode](https://login.fr.cloud.gov/passcode), complete the login to _cloud.gov_, and you'll get a one-time passcode. Copy/paste the passcode back into the CLI, as show [in this 30s video](TKTK).
+Visit the URL [https://login.fr.cloud.gov/passcode](https://login.fr.cloud.gov/passcode), complete the login to _cloud.gov_, and you'll get a one-time passcode. Copy/paste the passcode back into the CLI, as show [in this 30s video](https://s3-us-gov-west-1.amazonaws.com/cg-public/cg-otp-login-fast.mp4)
+
+---
+
+# _cloud.gov CLI login_
+
+![](https://s3-us-gov-west-1.amazonaws.com/cg-public/cg-otp-login-fast.mp4)
+
 
 ---
 

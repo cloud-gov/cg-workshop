@@ -2,7 +2,7 @@
 
 TARGET="lab05-state"
 I=0
-N=8
+N=12
 CFENV="fr-stage"
 
 die() {
@@ -58,7 +58,7 @@ apping() {
   app="cglab-n${i}"
   url="https://$app.$CFENV.cloud.gov"
   curl $url -o /dev/null -s
-  curl $url -s | grep -q "2 times" || printf "\n$url FAIL\n"
+  curl $url -s | grep -q "[2-9] times" || printf "\n$url FAIL\n"
 }
 
 
@@ -91,11 +91,20 @@ down() {
 }
 
 usage(){
-  echo "Fail arg $1 not recognized"
-  echo "$0 up|check|down"
+  echo "Fail $@"
+  echo "$0 tier up|check|down"
   exit 1
 }
 
+[ "$#" != 2 ] && usage "Need 2 args"
+
+tier=$1
+I=$(($tier * $N + $I))
+N=$(($I + $N))
+echo "=== Start from $I ==="
+sleep 2
+
+shift
 case $1 in 
   up)     up
           ;;
@@ -106,3 +115,4 @@ case $1 in
   *)      usage $1
           ;;
 esac
+

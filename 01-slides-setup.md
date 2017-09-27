@@ -46,7 +46,9 @@ If you're using an Amazon Workspace
 
 ---
 
-_Video of setting up Amazon Workspace TK_
+![](https://s3-us-gov-west-1.amazonaws.com/cg-public/Workspaces.mp4)
+
+_Amazon Workspace_
 
 ^ This starts from getting your invitation. Note that native client is preferred, this video shows the web client. The password is different from any other password you're setting up/using today. This just shows one way to get your computer set up for the workshop. Play and continue
 

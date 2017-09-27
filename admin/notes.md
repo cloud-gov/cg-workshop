@@ -44,3 +44,12 @@ After cf login, run `cf orgs`
 
 In addition to installing `vscode` `git` `cf` I updated the path to include `cf:\Program Files\7zip` following https://codingbee.net/tutorials/powershell/powershell-make-a-permanent-change-to-the-path-environment-variable
 
+# Media
+
+All media uploaded to GovCloud `cg-public`.  Materials are also in Google Drive: cloud.gov > Events > 201709 DigitalGov workshop
+
+```
+for movie in Workspaces.mp4 cg-otp-login*; do
+  aws s3 cp $movie s3://cg-public --acl public-read
+done
+```
