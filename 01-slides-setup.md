@@ -1,3 +1,4 @@
+theme: work,7
 slidenumbers: true
 footer: [https://github.com/18F/cg-workshop](https://github.com/18F/cg-workshop) 01-slides-setup.md
 <!-- 
@@ -19,6 +20,8 @@ This deck is a separate file since it's mostly screenshots, and shouldn't be pri
 
 ---
 
+![](images/cloud-gov-event.png)
+
 # As federal PM/Developer/CISO,
 # I want some hints on logistics 
 # So that I can participate in the workshop
@@ -27,27 +30,34 @@ This deck is a separate file since it's mostly screenshots, and shouldn't be pri
 
 ---
 
-Have visible:
-- The `powershell` (Windows), 
-   `iterm`(Mac) or `terminal` (Mac) window
+# Have visible:
+
+- The _powershell_ (Windows), _iterm_ (Mac) or 
+_terminal_ (Mac) window
+
 - The webpage with YouTube Live
-- The webpage with [lab notes](https://github.com/18F/cg-workshop/)
-  [https://github.com/18F/cg-workshop/blob/master/01-slides-setup.md](https://github.com/18F/cg-workshop/blob/master/01-slides-setup.md) 
+
+- The webpage with [lab notes](https://github.com/18F/cg-workshop/), listed in footer, below
+
+
 See next page for example
 
 ---
 
+[.hide-footer]
 ![](images/screenshot.png)
 
 ---
 
-If you're using an Amazon Workspace
+# If you're using an _Amazon Workspace_
+
 - Use your local browser for YouTube, Notes
 - Don't use the webclient, unless you must
 - Set up your Workspace and `powershell` as in the following video
 
 ---
 
+[.hide-footer]
 ![](https://s3-us-gov-west-1.amazonaws.com/cg-public/Workspaces.mp4)
 
 _Amazon Workspace_
@@ -55,6 +65,8 @@ _Amazon Workspace_
 ^ This starts from getting your invitation. Note that native client is preferred, this video shows the web client. The password is different from any other password you're setting up/using today. This just shows one way to get your computer set up for the workshop. Play and continue
 
 ---
+
+![](images/cloud-gov-event.png)
 
 # I want a _cloud.gov account_
 # So that I can use _cloud.gov_
@@ -76,50 +88,59 @@ If you already have an account, please make sure you can reach:
 
 ---
 
+[.hide-footer]
 # 1: Sign up for an account ...
 
 Visit: [https://account.fr.cloud.gov/signup](https://account.fr.cloud.gov/signup)
 
 ---
 
+[.hide-footer]
 ![](lab01-setup/images/01.png)
 
 ^ Get access
 
 ---
 
+[.hide-footer]
 ![fit](lab01-setup/images/01_01.png)
 
 ^Invitation sent
 
 ---
 
+[.hide-footer]
 ![](lab01-setup/images/02.png)
 
 ^View email
 
 ---
 
+[.hide-footer]
 ![](lab01-setup/images/03.png)
 
 ^Redeem invitation
 
 ---
 
+[.hide-footer]
 ![](lab01-setup/images/03_01.png)
 
 ---
 
+[.hide-footer]
 ![](lab01-setup/images/04.png)
 
 ---
 
+[.hide-footer]
 ![fit](lab01-setup/images/04_01.png)
 
 ^ Login again....
 
 ---
 
+[.hide-footer]
 ![fit](lab01-setup/images/06.png)
 
 ^ Token Code:
@@ -138,55 +159,67 @@ Google Authenticator or Microsoft Authenticator or Authy
 
 ---
 
+[.hide-footer]
 ![fit,left](lab01-setup/images/AUTH-goog.PNG)
 ![fit,right](lab01-setup/images/AUTH-msauth.PNG)
 
 ---
 
+[.hide-footer]
 ![fit](lab01-setup/images/AUTH-z1.PNG)
 
 ---
 
+[.hide-footer]
 ![fit](lab01-setup/images/AUTH-z2.PNG)
 
 ---
 
+[.hide-footer]
 ![fit,left](lab01-setup/images/AUTH-z3.PNG)
 ![fit,right](lab01-setup/images/06.png)
 
 ---
 
+[.hide-footer]
 ![fit,left](lab01-setup/images/AUTH-z4.PNG)
 ![fit,right](lab01-setup/images/06_01.png)
 
 ---
 
+[.hide-footer]
 ![fit](lab01-setup/images/06_02.png)
 
 ---
 
+[.hide-footer]
 ![fit](lab01-setup/images/07.png)
 
 ---
 
+[.hide-footer]
 ![](lab01-setup/images/08.png)
 
 ---
 
+[.hide-footer]
 ![fill](lab01-setup/images/09.png)
 
 ---
 
+[.hide-footer]
 # Future _cloud.gov_ logins to, e.g. _https://dashboard.fr.cloud.gov_
 
 ![inline](lab01-setup/images/login01.png) ![inline](lab01-setup/images/login02.png) 
 
 ---
 
+[.hide-footer]
 ![inline](lab01-setup/images/login03.png) ![inline](lab01-setup/images/AUTH-z4.PNG) ![inline](lab01-setup/images/login04.png)
 
 ---
 
+[.hide-footer]
 ![inline](lab01-setup/images/login05.png)
 
 ---
@@ -206,6 +239,9 @@ Meanwhile:
 ^ Wait here until 75% of participants are set up.
 
 ---
+
+
+![](images/cloud-gov-event.png)
 
 # Continue...
 
