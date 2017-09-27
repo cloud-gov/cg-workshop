@@ -856,8 +856,7 @@ All of these should show nothing:
 
 # 9 The 12 factor app
 
----
-
+<!-- Table formatting is hard 
 | Docs   |   |
 |:--- | :--- |
 | cloud.gov docs: [https://cloud.gov/docs/](https://cloud.gov/docs/)| Cloud Foundry docs: [https://docs.cloudfoundry.org](https://docs.cloudfoundry.org) |
@@ -865,7 +864,6 @@ All of these should show nothing:
 | Books |   |
 |:----  | --- | 
 | Cloud Foundry: The Definitive Guide: <br>Develop, Deploy, and Scale (2017, O'Reilly) | Cloud Foundry eBooks: <br>[https://content.pivotal.io/ebooks](https://content.pivotal.io/ebooks) |
-
 
 | Courses |   |
 |:---- |---| 
@@ -885,4 +883,14 @@ All of these should show nothing:
 | **Courses** |   |
 | edX Course: [https://edx.org](https://courses.edx.org/courses/course-v1:LinuxFoundationX+LFS132x+1T2017/course/) | CloudFoundry training materials: <br>[https://basics-workshop.cfapps.io](https://basics-workshop.cfapps.io) | 
 | **Other** |   |
+| Inquires: [cloud-gov-inquiries@gsa.gov](mailto:cloud-gov-inquiries@gsa.gov) | Twitter: @18F |
+-->
+
+---
+
+| Docs   |   |
+|:--- | :--- |
+| cloud.gov docs: [https://cloud.gov/docs/](https://cloud.gov/docs/)<br><br><br>**Books** | Cloud Foundry docs: [https://docs.cloudfoundry.org](https://docs.cloudfoundry.org) |
+| Cloud Foundry: The Definitive Guide: <br>Develop, Deploy, and Scale (2017, O'Reilly)<br><br><br>**Courses** | Cloud Foundry eBooks: <br>[https://content.pivotal.io/ebooks](https://content.pivotal.io/ebooks) |
+| edX Course: [https://edx.org](https://courses.edx.org/courses/course-v1:LinuxFoundationX+LFS132x+1T2017/course/)<br><br>**Other**| CloudFoundry training materials: <br>[https://basics-workshop.cfapps.io](https://basics-workshop.cfapps.io) | 
 | Inquires: [cloud-gov-inquiries@gsa.gov](mailto:cloud-gov-inquiries@gsa.gov) | Twitter: @18F |
