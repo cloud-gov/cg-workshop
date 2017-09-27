@@ -314,11 +314,11 @@ You can skip doing _cf push_ as we'll pick up from there in the next section.
 
 # Lab 4: Sinatra Application
 
-We'll use _cf push_ again, but this time to _stage_ and run a dynamic web applicaton. We'll see how to use the _manifest.yml_ to set deployment options.
+We'll use _cf push_ again, but this time to _stage_ and run a dynamic web application. We'll see how to use the _manifest.yml_ to set deployment options.
 
-The manifest provides application _metadata_ to CloudFoundry. We use it for non-default settings so we don't have to always specify on the command line, and we can bundle with the application.
+The manifest provides application _metadata_ to CloudFoundry. We use it for non-default settings so we don't have to always specify them on the command line, and we can bundle the manifest with the application.
 
-^ As with static site, let's review the slides, then we'll pause for everyone to run the commands<br> Sinatra is a _ruby_ web framework. The deployment process is the same for any supported Cloud Foundry language.
+^ As with static site, let's review the slides, then we'll pause for everyone to run the commands<br> Sinatra is a _ruby_ web framework. The deployment process is the same for any supported Cloud Foundry language.  <br>First, let's revisit and update what happens with CF PUSH:
 
 ---
 
@@ -335,7 +335,7 @@ The manifest provides application _metadata_ to CloudFoundry. We use it for non-
   * ~~Site~~ **App** starts on an ~~web~~ **app** host
   * ~~Site~~ **App** serves web requests **(if it binds to TCP port)**
 
-^ This last point -- we can also have _worker_ applications that's don't directly server traffic. Will Slack will mention those with Federalist.  Let's revisit the push command and update for an application. There's extra work in the _staging_ phase, where _buildpacks_ come into play.
+^The staging step of bundling _build dependencies_ is part of the _buildpack_ job, as we'll discuss in a moment. Also, apps can also run without binding, or listening, on a network port. These are _worker_ applications that's don't directly serve traffic. Will Slack will mention those with Federalist.  
 
 ---
 
@@ -349,7 +349,7 @@ If it’s a web process, it binds to a TCP port
 Instances are distributed across multiple cells
 Router distributes traffic across instances
 
-^ If you look at the labs04-app/Gemfile you'll see a lot of dependencies that the buildpack handles.
+^A couple points about how CF pulls things together  <br>If you look at the labs04-app/Gemfile you'll see a lot of dependencies that the buildpack handles. Buildpacks can be used so there are no online dependencies in your application push.  <br>The apps run in container instances that can be migrated between cells for resource management and uptime.
 
 ---
 
@@ -405,21 +405,19 @@ https://cglab.app.cloud.gov.
 
 _random-route_ will append random words to the URL.
 
-^ We use 1/8th the resource allocation.
+^ We use 1/8th of the default resource allocation.
 
 ---
 
 # Lab 4.2 Push the application
 
 ```powershell
-cf push -f lab04-app/manifest.yml
+cf push -f lab04-app/manifest.yml cglab
 ```
-
-^ There's no need for `name` since that's in the manifest.
 
 ---
 
-# Check your work 4.2
+# Check your work 4.2, 1/3
 
 The cf push results should resemble those below. Note all the buildpacks (and use of buildpack detection)
 
@@ -440,9 +438,9 @@ Downloaded ruby_buildpack (81.6K)
 
 ---
 
-# check your work, continued
+# check your work 4.2, continued 2/3
 
-The cf push final output should resemble below. Note the highlighted `urls`. Since we use `random-route` the URL here is [https:/cglab-confessable-pardner.app.cloud.gov](https://cglab-confessable-pardner.app.cloud.gov)
+The cf push output should resemble what's below. Note the highlighted `urls`. Since we use `random-route` the URL here is [https:/cglab-confessable-pardner.app.cloud.gov](https://cglab-confessable-pardner.app.cloud.gov)
 
 ```powershell, [.highlight: 4]
 ...
@@ -461,7 +459,7 @@ buildpack: ruby
 
 --- 
 
-# check your work, continued
+# check your work 4.2, continued 3/3
 
 Interact with the webpage at <br>
 https://cglab-RANDOM-WORDS.app.cloud.gov <br>
@@ -470,10 +468,9 @@ e.g., <br>
 
 ![right,fit](lab04-app/images/webapp.png)
 
-
 ---
 
-# Lab 4.3 Review the app status and health.
+# Lab 4.3 Review the app status and health
 
 Run:
 
@@ -509,7 +506,7 @@ buildpack:         ruby
 
 # Further exploration
 
-Once you've visited your app and viewed `cf app cgapp`, try the following:
+Once you've visited your app and viewed `cf app cglab`, try the following:
 
 * Run `cf buildpacks`. What languages are available by default?
 * Uncomment the `manifest.yml` line with `buildpack`, then run `cf push` and check status with `cf app cglab`. What's changed in staging or application status?
@@ -524,83 +521,106 @@ Once you've visited your app and viewed `cf app cgapp`, try the following:
 
 ---
 
-
 # Lab 5. I can share persistent data between app instances
 
-First we'll see the _services_ available to us, then use _create-service_ 
-to provision a simple Redis data store. We'll then _bind_ that service to 
-our application.  Our application we'll use its _environment variables_ to determine
-the connection information
+First we'll see the _services_ available to us in the _marketplace_, then use _create-service_ to provision a simple Redis data store. 
 
+We'll then _bind_ that service to our application.  
+
+Our application wll use its _environment variables_ to determine its connection information
 
 ---
 
 # Lab 5.1 Review the available _services_
 
-Run `cf marketplace` and look for the _redis_ services. Examine the details with `cf marketplace -s redis32`. 
+Run the command below. How many Redis _services_ are there?
+
+```
+   cf marketplace
+```
+
+Examine `redis32` service details with the `-s` option. 
+
+```
+   cf marketplace -s redis32
+```
+
+What's the max memory of the `micro` _plan_?
 
 ---
 
 # Check your work 5.1
 
 ```
-$ cf marketplace
-Getting services from marketplace in org sandbox-cao / space peter.burkholder as peter.burkholder@cao.gov...
+> cf marketplace
+Getting services from marketplace in org sandbox-cao / space p.burkholder ...
 OK
 
-service                       plans                         description
-aws-rds                       shared-psql, medium-psql* ... Persistent DBs using Amazon RDS
 ...
-redis28                       standard         An open source in-memory data structure store.
-redis32                       micro, standard-ha, standard       An open source in-memory database.
+redis28         standard         An open source in-memory data structure store.
+redis32         micro, standard-ha, standard       An open source in-memory database.
 ```
+
+^ There are two Redis _services_, `redis28` and `redis32`.
 
 ---
 
-# Check your work 5.1, continued
+# Check your work 5.1, continued 2/2
 
 ```
-$ cf marketplace -s redis32
+> cf marketplace -s redis32
 Getting service plan information for service redis32 as peter.burkholder@cao.gov...
 OK
 
-service plan   description                                             free or paid
-micro          Redis 3.2, persistent storage, 32m.                     free
-standard-ha    Redis 3.2 with Redis Sentinel and persistent storage.   free
-standard       Redis 3.2 with persistent storage.                      free
+service plan   description                                                 free or paid
+standard-ha    Redis 3.2 Redis Sentinel, persistent storage, 512Mb limit   free
+standard       Redis 3.2, persistent storage, 512Mb memory limit           free
+micro          Redis 3.2, persistent storage, 64Mb memory limit            free
 ```
+
+^ The  _micro_  plan is capped at 64Mb (enough for ~800,000 short keys)
 
 ---
 
 # Lab 5.2: Create a Redis service with _create-service_
 
-See the command help with `cf create-service -h`. Note the format is:
-`cf create-service redis32  PLAN  NAME`
+The format for _create-service redis32_ is:
 
-Then issue the command: 
-`cf create-service redis32  micro  cglab-redis`
+```
+   cf create-service redis32  PLAN  NAME 
+```
+Run:
+
+```
+   cf create-service redis32 micro cglab-redis
+```
 
 Wait one minute, then check your service with:
-`cf service cglab-redis`
+
+```
+   cf service cglab-redis
+```
 
 ---
 
 # Check your work 5.2
 
 ```
-$ cf create-service redis32  micro cglab-redis
+> cf create-service redis32  micro cglab-redis
 Creating service instance cglab-redis in org sandbox-cao 
 OK
 
 Create in progress. Use 'cf services to check
+```
 
-
-$ cf service cglab-redis
+```[.highlight: 1,7]
+> cf service cglab-redis
 
 Service instance: cglab-redis
 Service: redis32
 Bound apps:
 ... [snip] ...
+Status: create succeeded
 Started: 2017-09-21T14:40:57Z
 Updated: 2017-09-21T14:42:01Z
 ```
@@ -609,44 +629,36 @@ Updated: 2017-09-21T14:42:01Z
 
 # Lab 5.3 Associate service and app with _bind-service_
 
-When `cf service cglab-redis` status is healthy, get
-current app `environment` with: 
-`cf env cglab`.
+The app, _cglab_ needs to know about _cglab-redis_. The _bind-service_ shares service information by setting _environment variables_ in the app container.
 
-Then bind service with: 
-`cf bind-service cglab cglab-redis`.
+Run: 
 
-Compare new results of 
-`cf env cglab`
+```
+   cf bind-service cglab cglab-redis
+```
+
+View the environment variables in the app with:
+
+```
+   cf env cglab
+```
+
+What's the first service under `VCAP_SERVICES`?
 
 ---
 
 # Check your work 5.3
 
-```
-$ cf env cglab
-Getting env variables for app cglab in org sandbox-cao 
+Your results should resemble:
+
+``` [.highlight: 1,6,12,13]
+> cf bind-service cglab cglab-redis
+Binding service cglab-redis to app cglab in sandbox-cao 
 OK
+TIP: Use 'cf restage cglab' to ensure your changes ...
 
-System-Provided:
-
-
-{
- "VCAP_APPLICATION": {
-... 
-
-$ cf bind-service cglab cglab-redis
-Binding service cglab-redis to app cglab in org sandbox-cao 
-OK
-TIP: Use 'cf restage cglab' to ensure your changes take effect
-```
----
-
-# Check your work 5.3, continued
- 
-```
-$ cf env cglab
-Getting env variables for app cglab in org sandbox-cao
+> cf env cglab
+Getting env variables for app cglab in sandbox-cao
 OK
 
 System-Provided:
@@ -656,61 +668,53 @@ System-Provided:
 ...
 ```
 
+^ The first service is _redis32_
+
 ---
 
 # Lab 5.4 Push the new version of our app
 
-Change directory to 
-`cg-workshop/07-shared-state`
+Now we can push the version of the app that uses the data store:
 
-and run 
-`cf push`
+Run:
 
-Check status with 
-`cf app cglab` 
+```
+   cf push cglab -f lab05-state/manifest.yml
+```
 
-and visit your app at the random-route URL. Refresh page multiple times.
+Has the app's URL changed? 
+
+Visit your app at the URL. Refresh page multiple times. What does the app do?
 
 ---
 
 # Check your work 5.4
 
 ```
-$ cf push
-Using manifest file .../cg-workshop/07-shared-state/manifest.yml
-
-Updating app cglab in org sandbox-cao 
-OK
-...
-$ cf app cglab
-Showing health and status for app cglab in org sandbox-cao 
-
-name:              cglab
-requested state:   started ...
-routes:            cglab-gastrocnemian-calefaction.app.cloud.gov
-...
-
-     state     since                  cpu    memory         disk         
-#0   running   2017-09-21T15:17:06Z   0.0%   19.8M of 64M   83.9M of 256M
+> cf push
 ```
+
 ---
 
 # Check your work 5.4, continued
 
-![fit](lab07-state/images/running.png)
-
+![fit](lab05-state/images/running.png)
 
 ---
 
 # Lab 5.5 Scaling
 
-Create an additional app instance with 
-`cf scale cglab -i 2`
+Since CF stores executable artifacts and runs them in containers, you can quickly _scale_ your app to meet demand.
 
-Refresh webapp page multiple times
+Scale _cglab_ to two instances:
 
-Then scale back to one with 
-`cf scale cglab -i 1`
+```
+   cf scale cglab -i 2
+```
+
+Immediately, refresh the _cglab_ webapp page multiple times.
+
+How long until a new instance was available?
 
 ---
 
@@ -735,29 +739,34 @@ Then scale back to one with
                       CELL 1       CELL 2
 
                         |            |
-      APP A INSTANCE 1 -|            |- APP A INSTANCE 2
-      APP B INSTANCE 2 -|            |- APP B INSTANCE 1
+      APP A INSTANCE 0 -|            |- APP A INSTANCE 1
+      APP B INSTANCE 1 -|            |- APP B INSTANCE 0
 ```
 
 ---
 
 # Further exploration
 
-* Go to your app's URL + '/env": http://cglab....app.cloud.gov/env
-* Use `cf set-env` to add new variables
+Once you've seen the app count visits per scaled instance:
+
+* Go to your app's URL + '/env": http://cglab....app.cloud.gov/env[^2]
+* Can you use `cf set-env` to add new variables?
   * Hint: You'll need `cf restage` for your app to pick them up.
+* Try scaling the app to four, then back to two. Which instances are kept?
+* Can you scale to zero?
+
+[^2]: These environment variables are deliberately exposed by the app for demonstration purposes. You would never have this feature in any _real_ app.
 
 ---
 
-# I want to know what my CF app is doing
-# So that I can debug it
+# I want to know what my app is _doing_
+# So that I can _debug_ it
 
 ---
 
 #  6. I can investigate my apps to determine the cause of errors
 
 ---
-
 
 * Maintainance, logging and debugging
   * Restage to pick up new buildpacks: 
@@ -774,38 +783,38 @@ Then scale back to one with
 
 ---
 
-1. CircleCI  - Demo only! or optional for GitHub users 
+
+---
+
+# 7. CircleCI  - Demo only! or optional for GitHub users 
   * Accomplished:
     - Ensuring continuous integration testing
     - Ensure consistent environments
 
----
-
-1. Access control -Demo only, skip if short on time.
-  * `cf orgs`
-  * `cf spaces`
-  * Discussion / Demo only
-  * Accomplished: 
-    * Inbound access control w/ oauth - 
-    * Egress to external providers by fixed IP
 
 ---
 
-# YAGNI
-
-1. Blue-green releases
-  * Autopilot
-1. Optional: Worker apps
-  * See Aidan's notes for a good write-up
-1. Development tips
-  * `cf local`
+# 8 Clean UP
 
 ---
 
-# Closing: The 12-factor App
+# 9 The 12 factor app
 
 ---
 
-# Parking lot
+| Docs   |   |
+|:--- | :--- |
+| cloud.gov docs: [https://cloud.gov/docs/](https://cloud.gov/docs/)| Cloud Foundry docs: [https://docs.cloudfoundry.org](https://docs.cloudfoundry.org) |
 
-- health checks
+| Books |  |
+| ----  | --- | 
+| Cloud Foundry: The Definitive Guide: <br>Develop, Deploy, and Scale (2017, O'Reilly) | Cloud Foundry eBooks: <br>[https://content.pivotal.io/ebooks](https://content.pivotal.io/ebooks) |
+
+
+| Courses |  |
+|---- |---| 
+| edX Course: [https://edx.org](https://courses.edx.org/courses/course-v1:LinuxFoundationX+LFS132x+1T2017/course/) | CloudFoundry training materials: <br>[https://basics-workshop.cfapps.io](https://basics-workshop.cfapps.io) | 
+
+| Other |  |
+|---- |---| 
+| Inquires: [cloud-gov-inquiries@gsa.gov](mailto:cloud-gov-inquiries@gsa.gov) | Twitter: @18F |
