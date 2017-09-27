@@ -791,9 +791,76 @@ Once you've seen the app count visits per scaled instance:
 
 ---
 
-#  6. I can investigate my apps to determine the cause of errors
+# Lab 6. I can investigate my apps to determine the cause of errors
+
+Let's look at application _events_, _logs_ and live debugging over _ssh_. 
+
+In the long-term, you'll need to do application maintenance via _restage_ to pick up Buildpack updates
 
 ---
+
+# Lab 6.1: View live application logs
+
+View current app activity:
+
+```
+  cf logs cglab
+```
+
+Then interact with your _cglab_ webpage. Press `Ctrl-C` to stop log streaming
+
+Do you see any logs from the router? From the app?
+
+---
+
+# Check your work 6.1
+
+```
+> cf logs cglab
+2017-09-27T12:04:03.18[RTR/1] OUT
+2017-09-27T12:04:03.43[RTR/0] OUT cglab-gastro-action.app.cloud.gov
+...
+```
+
+The app wasn't written to emit logs (which is poor practice), so you may only see RTR logs except for the occasional APP error.
+
+All cloud.gov logs are automatically streamed to an internal Elasticsearch/Kibana cluster for search/query.
+
+---
+
+# Lab 6.2: View historical logs in Kibana
+
+
+* Visit: [https://logs.fr.cloud.gov](https://logs.fr.cloud.gov)
+* Enter `ERR` in the Search box, then search
+* For any results, click the ▶︎ triangle to expand, then look for _@message_
+* What error is our _cglab_ application giving?
+
+![inline, 96%](lab05-state/images/kibana-search.png)
+
+---
+
+_Check your work 6.2 1/2_
+
+![inline](lab05-state/images/kibana-results.png) 
+
+---
+
+_Check your work 6.2 2/2_
+
+![inline](lab05-state/images/kibana-view-msg.png)
+
+
+---
+
+
+
+
+
+
+```
+   cf logs --recent
+
 
 * Maintainance, logging and debugging
   * Restage to pick up new buildpacks: 
@@ -822,7 +889,6 @@ Once you've seen the app count visits per scaled instance:
 ---
 
 # 8 Clean Up
-
 
 
 ```
@@ -857,35 +923,7 @@ All of these should show nothing:
 
 # 9 The 12 factor app
 
-<!-- Table formatting is hard 
-| Docs   |   |
-|:--- | :--- |
-| cloud.gov docs: [https://cloud.gov/docs/](https://cloud.gov/docs/)| Cloud Foundry docs: [https://docs.cloudfoundry.org](https://docs.cloudfoundry.org) |
 
-| Books |   |
-|:----  | --- | 
-| Cloud Foundry: The Definitive Guide: <br>Develop, Deploy, and Scale (2017, O'Reilly) | Cloud Foundry eBooks: <br>[https://content.pivotal.io/ebooks](https://content.pivotal.io/ebooks) |
-
-| Courses |   |
-|:---- |---| 
-| edX Course: [https://edx.org](https://courses.edx.org/courses/course-v1:LinuxFoundationX+LFS132x+1T2017/course/) | CloudFoundry training materials: <br>[https://basics-workshop.cfapps.io](https://basics-workshop.cfapps.io) | 
-
-| Other |   |
-|:---- |---| 
-| Inquires: [cloud-gov-inquiries@gsa.gov](mailto:cloud-gov-inquiries@gsa.gov) | Twitter: @18F |
-
----
-
-| Docs   |   |
-|:--- | :--- |
-| cloud.gov docs: [https://cloud.gov/docs/](https://cloud.gov/docs/)| Cloud Foundry docs: [https://docs.cloudfoundry.org](https://docs.cloudfoundry.org) |
-| **Books** |   |
-| Cloud Foundry: The Definitive Guide: <br>Develop, Deploy, and Scale (2017, O'Reilly) | Cloud Foundry eBooks: <br>[https://content.pivotal.io/ebooks](https://content.pivotal.io/ebooks) |
-| **Courses** |   |
-| edX Course: [https://edx.org](https://courses.edx.org/courses/course-v1:LinuxFoundationX+LFS132x+1T2017/course/) | CloudFoundry training materials: <br>[https://basics-workshop.cfapps.io](https://basics-workshop.cfapps.io) | 
-| **Other** |   |
-| Inquires: [cloud-gov-inquiries@gsa.gov](mailto:cloud-gov-inquiries@gsa.gov) | Twitter: @18F |
--->
 
 ---
 
