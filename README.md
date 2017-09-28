@@ -10,7 +10,7 @@ Agenda:
 
 * 09:00 - 09:10: Welcome
 * 09:10 - 09:40: The case for cloud.gov
-* 09:40 - 10:20: Hands-on: Connecting and your first stie
+* 09:40 - 10:20: Hands-on: Connecting and your first site
 * 10:20 - 10:30: Break
 * 10:30 - 10:40: Case Study
 * 10:40 - 11:30: Hands-on part two: 
