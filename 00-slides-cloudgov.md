@@ -1,4 +1,3 @@
-slidenumbers: true
 theme: work,7
 footer: ![inline 14%](images/cloud-gov.png) 
 [.hide-footer: true]
@@ -51,8 +50,8 @@ footer: ![inline 14%](images/cloud-gov.png)
   * Housing for disaster victims
 * **A team**
   * Project / Product Managers
-  * Designers / Developers
-  * Ops / Security Folks
+  Designers / Devs 
+  Ops / Sec
 * **__A platform__**
   * **Build**
   * **Test**
@@ -242,23 +241,15 @@ cf scale cg-flask-demo -i 4
 
 |   |  | 
 | --- | --- | 
-| Relational databases (RDS) | PostgreSQL, MySQL, Oracle |
-| Storage (S3) | Private or public data buckets |
-| Custom domain | HTTPS + Content Delivery Network |
-| Redis | In-memory data structure store |
-| Elasticsearch | Full-text search engine |
-| Service accounts | For continuous deployment and auditing |
-| Identity provider |Use cloud.gov authentication in apps |
+| **Relational databases (RDS)** | PostgreSQL, MySQL, Oracle |
+| **Storage (S3)** | Private or public data buckets |
+| **Custom domain** | HTTPS + Content Delivery Network |
+| **Redis** | In-memory data structure store |
+| **Elasticsearch** | Full-text search engine |
+| **Service accounts** | For continuous deployment and auditing |
+| **Identity provider** |Use cloud.gov authentication in apps |
 
-
----
-
-## Orgs, Spaces, Apps & Users[^3]
-
-![inline](images/org-space-app-user.png)
-
-
-[^3]: Needs redrawing. From: https://www.slideshare.net/jencompgeek/whats-newincloudfoundry
+^ S3: basic vs public, RDS: enc-at-rest, limit ingress.
 
 ---
 
@@ -266,7 +257,7 @@ cf scale cg-flask-demo -i 4
 ## Implement: Logs & Diagnostics
 
 * logs: Kibana, custom logdrains
-* **`cf ssh`** ssh into ephemeral containers
+* **`cf ssh`**: diagnose ephemeral containers
 
 ![inline](images/kibana.png)
 
@@ -286,41 +277,39 @@ cf scale cg-flask-demo -i 4
 * **Risk Management Framework (Low, Moderate, High)**
 * **NIST 800-53**
 
-^ Note: Fed systems must have ATO from agency CIO, generally follows CISO
-lead, and they are obliged to follow NIST-800-53 standards, or accept risk of not doing so.
-Risk averse: reputation, bad press, IG report, congress or potentially fired.
+^ Note: Fed systems must have ATO from agency CIO, generally follows CISO lead, and they are obliged to follow NIST-800-53 standards, or accept risk of not doing so.
+
+<!-- Risk averse: reputation, bad press, IG report, congress or potentially fired. -->
 
 ^ Clarify 325 for MODERATE, simplified, 
 
 ^ Systems need to be classified: Violaion of CIA: Low, Moderate, Hi. Depending on classification, then appropriate controls in place. 4004 pages
 
-
-
 ---
 
-[.build-lists: true]
 
 # Authorize: Controls
 
 * DataCenter: All 325 - You're responsible for:
   * Security Guards, PE-3(3)
   * Disk wiping, MP-6(8)
-* IaaS: FedRAMP - You _inherit_ ~88 controls, but still 237:
+* IaaS: FedRAMP - You _inherit_ ~88 controls, still 237:
   * System logs, AU-12
   * Kernel patches, SI-2
 * cloud.gov:
   * See next slide....
 
+^ MP - media protection, PE - physical env, SI - system integrity, AU - audit and accountability
+
 ---
 
-[.footer:]
-![](images/cg-faster-atos.png)
+[.hide-footer: true]
 
-^ If you want a second example: AC-21: Facilitate information sharing (customers need to set their own policies and training for their teams for the information about their applications that they can share)
+![fit](images/cg-faster-atos.png)
 
 ^ If you want a second example: AU-6 is "Audit review, analysis, and reporting" - cloud.gov provides a built-in logging feature, but customers need to review and analyze their own logs
 
-^ If you want a second example: CM-8 (1) is "updates the inventory of information system components as an integral part of component installations, removals, and information system updates" - cloud.gov automatically provides inventory information for cloud.gov usage (although customers should still double check to make sure it fits with their needs for inventories)
+^ SC - security controls, IA - id and auth, 
 
 
 ---
@@ -330,7 +319,9 @@ Risk averse: reputation, bad press, IG report, congress or potentially fired.
 * 15 unshared controls, 41 shared
 * Simplicity and secure defaults
 * Reduce shadow IT (thanks, self-service!)
-* Example: stack-clash
+* Example: **Stack Clash** kernel patch: < 24 hrs
+
+^ credit-card cloud (server in closet).
 
 ---
 
@@ -342,26 +333,16 @@ Let's revisit the mission...
 
 # Suppose:
 
-
-* A mission
+* **A mission**
   * Housing for disaster victims
-* A team
+* **A team**
   * Project / Product Managers
-  * Designers / Developers
-  * Ops / Security Folks
-* A platform
+  Designers / Devs 
+  Ops / Sec
+* __**A platform**__
   * **Build**
   * **Test**
   * **Run**
-
----
-
-# Platform
-
-* Stack: WebServer, AppServer, Database, Cache, Index
-* Environments: (Local), Dev, Test, Stage, Prod
-* User management: Admin, Devs, Auditors
-* Operations: Patch, Logs, CDN, Scaling, Availability
 
 ---
 
