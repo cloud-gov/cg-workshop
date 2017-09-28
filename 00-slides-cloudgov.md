@@ -4,7 +4,23 @@ footer: ![inline 14%](images/cloud-gov.png)
 
 ![](images/hands-on-workshop-with-cloud-gov.png)
 
-^ Thank you for coming!
+
+---
+
+|    |   |
+| ---: | --- |
+| 09:00 | **Welcome**<br> Shashank Khandelwal |
+| 09:10 | **cloud.gov Overview** |
+| 09:40 | **cloud.gov Hands On Pt 1** |
+| 10:20 | **Break** |
+| 10:30 | **Federalist**<br> Will Slack |
+| 10:40 | **cloud.gov Hands On Pt 2** |
+| 11:30 | **Q & A** |
+
+[github.com/18F/cg-workshop](https://github.com/18F/cg-workshop)
+
+
+![right](images/cge-right.png)
 
 ---
 
