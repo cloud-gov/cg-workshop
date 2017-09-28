@@ -5,6 +5,8 @@ footer: ![inline 14%](images/cloud-gov.png)
 
 ![](images/hands-on-workshop-with-cloud-gov.png)
 
+^ Thank you for coming!
+
 ---
 
 [.hide-footer: true]
@@ -12,9 +14,8 @@ footer: ![inline 14%](images/cloud-gov.png)
 ![left](https://upload.wikimedia.org/wikipedia/commons/f/f3/Uncle_Sam_%28pointing_finger%29.jpg)
 
 # [fit] I Want You
-# to use
+# [fit] to use **cloud.gov**
 
-* :cloud: **cloud.gov**
 * ➡️: Focus on mission
 * 🕑: Eliminate long lead times
 * 💵: Your tax 💰 ($85B, 8.2% :cloud:)[^1]
@@ -22,16 +23,17 @@ footer: ![inline 14%](images/cloud-gov.png)
 
 [^1]: CIO IT Dashboard for FY2017 https://www.itdashboard.gov/#learn-basic-stats
 
-^ Note: Here's my thesis. I want you to sign up for a PaaS.  In particular, cloud.gov, have to be. There are 4 reasons, These are my reasons and I'd like them to be yours too. 
+^ Thesis. 4 reasons - mY passion and I"d like them to be yours.
 
-^ cloud.gov enables mission like nothing else available to the federal govt at a TCO below most other options
+^ 1st Enables mission like nothing else available to the federal govt at a TCO below most other options
 
-^ First, it's about the DevOps. Or DevSecOps, or DevSecCompOps. Regardless, since 2010 I've been an student of and advocate for DevOps practices: bring code development practices to operations (code, version control, tests, and automation, and operational awareness to developers (metrics, logging, sharing, composability, reliability). The DevOps why: in business, it can be summarized a short loop from "AHa!" to "KaChing" -- or "Aha" to "Mission realization". And this lag reduction through automation comes with better reliability and security than traditional operations. >> I want all of you to have this because, in the end, it's more sane and humane than the way we've done it.
+^ 2nd Lead times. Since 2010 student/advocate for DevOps - AHA! -> Kaching! Dev to Ops, and Ops to Dev. Better everything. Sane. Humane
 
+^ 3rd $$. 8.2% "Provisioned" Services. We can get better value
 
-^ Note: Tax dollars. $84.7 billion in unclass IT spend, only 8.2% of it in "Provisioned" Services. We can get much better value that than -- esp. when the budgets of many agencies are going to get slashed, we must deliver better value.
+^ 4th Lastly, a sense of patriotism - and an example to the world 
 
-^ Note: Lastly, a sense of patriotism. I want beautiful, well-run sites that are a delight to use, and I want the world to share in them by building in the open. So let's get to what I mean by a full-service PaaS
+^ Misson focus / Speed of Exec / $$ Stewardship / We deserve.  How then does ;cg do this?
 
 ---
 
@@ -71,24 +73,28 @@ footer: ![inline 14%](images/cloud-gov.png)
 * **Acquire: *weeks* // Running: *hours* 
 // Build: *months* // Authorize: _weeks_**
 
-^ Note: By commodity it should be no harder to run your platform that it is to run your iPad or Android table. You do not take your device to Genius Bar or equivalent to update it, or get new software, or configure the WiFi. These are self-service, have sane defaults, include vetted applications in a marketplace, and are regularly, or continually patched.
+^ Stack / Environment / Users / Operations
 
+^ Note: By commodity:  no harder to run your platform run your iPad or Android table. u
 
-^This idea that we can treat so much of an underlying platform as self-service commodity that is still performant and compliant ---- how to address adoption/obstacles
+^ No genius bar to update it, get new software, or configure the WiFi. 
 
+^These are self-service, have **sane defaults**, include **vetted applications** in a marketplace, and are regularly, or **continually patched.**
 
-^Some folks will be hestitant work. That might be you -- so let's look at the potential "Nope" responses and get them to thumbs up.
+^We have the bold nothion that we treat so much of an underlying platform as self-service commodity that is still performant and compliant 
+
 
 ---
 
 # [fit]![inline](images/cloud-gov.png)
 
-* open-source Cloud Foundry PaaS atop AWS GovCloud[^2]
-* available to Departments & Agencies by _IAA_
-* FedRAMP P-ATO Moderate, DISA Level 2
-* built/run by 18F/TTS/GSA as a cost-recoverable service 
+* **Open-source Cloud Foundry PaaS atop AWS GovCloud[^2]**
+* **Available to Departments & Agencies by _IAA_**
+* **FedRAMP P-ATO Moderate, DISA Level 2**
+* **Built/run by 18F/TTS/GSA as a cost-recoverable service**
 
 [^2]: Multi-cloud w/ Azure USGov on our roadmap
+
 
 ---
 
@@ -112,10 +118,17 @@ footer: ![inline 14%](images/cloud-gov.png)
 * Programming languages
 * Automated updates
 
+^ I came to federal service from Chef Software. Enterprise financial, insurance, manufacturing.
+
+^ All the dev: please give me an App Server and a Database and let us get to work!
+
+^ Assuming you get ;cg what does working with us look like?
+
 ---
 
 ![](images/cloud-gov-event.png)
 # [fit] 2 / Getting to Launch
+
 
 ---
 
@@ -133,7 +146,13 @@ footer: ![inline 14%](images/cloud-gov.png)
 * IAAs: weeks instead of months
 * Pricing: $$Risk \times Complexity$$
   * Prototyping $$\times$$ Trivial = $20k/ann.
-  * FISMA Moderate $$\times$$ Complex = $130k/ann.
+  * FISMA Moderate $$\times$$ Complex = $110k/ann.
+
+---
+
+# Pricing
+
+![inline](images/pricing.png)
 
 ---
 
@@ -149,7 +168,7 @@ footer: ![inline 14%](images/cloud-gov.png)
 # Implement: Users & Roles
 
 * Authentication: 
-  * Agency IdP or MAX.gov
+  * Agency IdP or cloud.gov
 * Authorization (CF's UAA)
   * _Manager_, _Developer_ , _Auditor_ $$\times$$
   * _Organization_ (EPA, FEC) & _Space_ (`dev`, `stage`)
@@ -440,12 +459,6 @@ The power of :cloud: is not in creating a resource, but in destroying it.
 ^And some measure of re-education
 
 ---
-
-
-# Pricing
-
-![inline](images/pricing.png)
-
 
 ---
 
