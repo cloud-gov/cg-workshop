@@ -1,19 +1,13 @@
-footer: ![inline 14%](images/18Flogo-192p.png) ![inline 14%](images/tweet.png) @pburkholder
-theme: Zurich, 2
 slidenumbers: true
+theme: work,7
+footer: ![inline 14%](images/cloud-gov.png) 
+[.hide-footer: true]
+
+![](images/hands-on-workshop-with-cloud-gov.png)
 
 ---
 
-# The case for 
-# _cloud.gov_
-
-Peter Burkholder
-18F/cloud.gov Platform Engineer
-
-^Note: Add :camera: to slides that deserve a longer linger by operator
-
----
-
+[.hide-footer: true]
 [.build-lists: true]
 ![left](https://upload.wikimedia.org/wikipedia/commons/f/f3/Uncle_Sam_%28pointing_finger%29.jpg)
 
@@ -21,16 +15,18 @@ Peter Burkholder
 # to use
 
 * :cloud: **cloud.gov**
-* ➡️: Mission
+* ➡️: Focus on mission
 * 🕑: Eliminate long lead times
-* 💵: Your tax 💰 ($84.7B, 8.2% :cloud:)[^1]
-* 🇺🇸: Excellent open-source services
+* 💵: Your tax 💰 ($85B, 8.2% :cloud:)[^1]
+* 🇺🇸: Provide great public service
 
 [^1]: CIO IT Dashboard for FY2017 https://www.itdashboard.gov/#learn-basic-stats
 
-^ Note: Here's my thesis. I want you to sign up for a PaaS.  I'd like it to be cloud.gov, but it doesn't have to be. There are 3 reasons, none of which is my sales commission. These are my reasons and I'd like them to be yours too. ^ cloud.gov enables mission like nothing else available to the federal govt at a TCO below most other options
+^ Note: Here's my thesis. I want you to sign up for a PaaS.  In particular, cloud.gov, have to be. There are 4 reasons, These are my reasons and I'd like them to be yours too. 
 
-^  Note: First, it's about the DevOps. Or DevSecOps, or DevSecCompOps. Regardless, since 2010 I've been an student of and advocate for DevOps practices: bring code development practices to operations (code, version control, tests, and automation, and operational awareness to developers (metrics, logging, sharing, composability, reliability). The DevOps why: in business, it can be summarized a short loop from "AHa!" to "KaChing" -- or "Aha" to "Mission realization". And this lag reduction through automation comes with better reliability and security than traditional operations. >> I want all of you to have this because, in the end, it's more sane and humane than the way we've done it.
+^ cloud.gov enables mission like nothing else available to the federal govt at a TCO below most other options
+
+^ First, it's about the DevOps. Or DevSecOps, or DevSecCompOps. Regardless, since 2010 I've been an student of and advocate for DevOps practices: bring code development practices to operations (code, version control, tests, and automation, and operational awareness to developers (metrics, logging, sharing, composability, reliability). The DevOps why: in business, it can be summarized a short loop from "AHa!" to "KaChing" -- or "Aha" to "Mission realization". And this lag reduction through automation comes with better reliability and security than traditional operations. >> I want all of you to have this because, in the end, it's more sane and humane than the way we've done it.
 
 
 ^ Note: Tax dollars. $84.7 billion in unclass IT spend, only 8.2% of it in "Provisioned" Services. We can get much better value that than -- esp. when the budgets of many agencies are going to get slashed, we must deliver better value.
@@ -39,16 +35,8 @@ Peter Burkholder
 
 ---
 
-# Road map
-
-## 1 / The Mission
-## 2 / Sign me Up
-## 3 / Getting to :thumbsup:
-## 4 / Case Studies
-
----
-
-# 1 / The Mission
+![](images/cloud-gov-event.png)
+# [fit] 1 / The Mission
 
 ---
 
@@ -57,14 +45,13 @@ Peter Burkholder
 
 # Suppose:
 
-
-* A mission
-  * Housing for hurricane victims
-* A team
+* **A mission**
+  * Housing for disaster victims
+* **A team**
   * Project / Product Managers
   * Designers / Developers
   * Ops / Security Folks
-* A platform
+* **__A platform__**
   * **Build**
   * **Test**
   * **Run**
@@ -74,46 +61,29 @@ Peter Burkholder
 ---
 
 [.build-lists: true]
-
 # Platform
 
-* Stack: WebServer, AppServer, Database, Cache, Index
-* Environments: (Local), Dev, Test, Stage, Prod
-* User management: Admin, Devs, Auditors
-* Operations: Patch, Logs, CDN, Scaling, Availability
+* **Stack:** WebServer, AppServer, Database, Cache, Index
+* **Environments:** (Local), Dev, Test, Stage, Prod
+* **User** management: Admin, Devs, Auditors
+* **Operations:** Patch, Logs, CDN, Scaling, Availability
 * **All of this is __commodity__**: think iPad or Android Tablet
-* **All of this is __commodity__**: & what constitutes a "full-service Paas"
-* Feds: Acquire: weeks, Running: hours, Build: months, Authorize: weeks
+* **Acquire: *weeks* // Running: *hours* 
+// Build: *months* // Authorize: _weeks_**
 
 ^ Note: By commodity it should be no harder to run your platform that it is to run your iPad or Android table. You do not take your device to Genius Bar or equivalent to update it, or get new software, or configure the WiFi. These are self-service, have sane defaults, include vetted applications in a marketplace, and are regularly, or continually patched.
 
----
-
-# Two reactions
-
----
-
-![left](https://media.giphy.com/media/ogW3xiTxLO4ko/giphy.gif)
 
 ^This idea that we can treat so much of an underlying platform as self-service commodity that is still performant and compliant ---- how to address adoption/obstacles
 
----
-
-![left](https://media.giphy.com/media/ogW3xiTxLO4ko/giphy.gif)
-![right](https://media.giphy.com/media/V5Jc8pRfCFkQw/giphy.gif)
 
 ^Some folks will be hestitant work. That might be you -- so let's look at the potential "Nope" responses and get them to thumbs up.
 
-
 ---
 
-# 2 / Sign me Up
+# [fit]![inline](images/cloud-gov.png)
 
----
-
-# What is cloud.gov?
-
-* open-source CloudFoundry PaaS atop AWS GovCloud[^2]
+* open-source Cloud Foundry PaaS atop AWS GovCloud[^2]
 * available to Departments & Agencies by _IAA_
 * FedRAMP P-ATO Moderate, DISA Level 2
 * built/run by 18F/TTS/GSA as a cost-recoverable service 
@@ -126,11 +96,11 @@ Peter Burkholder
 
 ![right](images/PaaS Grimace.png)
 
-*Pre-built environment ready for deploying an application.*
+**Pre-built environment ready for deploying an application.**
 
-*Developers can focus on mission needs.*
+**Developers can focus on mission needs.**
 
-*Common technology resources are managed by an expert operations team:*
+**Common technology resources are managed by an expert operations team:**
 
 * Operating system
 * Databases
@@ -141,6 +111,11 @@ Peter Burkholder
 * Vulnerability scans
 * Programming languages
 * Automated updates
+
+---
+
+![](images/cloud-gov-event.png)
+# [fit] 2 / Getting to Launch
 
 ---
 
@@ -210,7 +185,7 @@ cf set-space-role peterb prod SpaceAuditor
 ---
 
 [.build-lists: true]
-# Time machine
+# [fit] Time machine
 * **Procured :white_check_mark:**
 * **Implemented:**
   * **Users and Authentication :white_check_mark:**
@@ -222,24 +197,15 @@ cf set-space-role peterb prod SpaceAuditor
 
 ---
 
-# Implement: Python Application
+# [fit] Implement: Python Application
 
-```sh
+``` 
 git clone https://github.com/18F/cf-hello-worlds.git
 cd cf-hello-worlds/python-flask
 cf push cg-flask-demo
 open https://cg-flask-demo.app.cloud.gov
 cf scale cg-flask-demo -i 4 
 ```
-
----
-
-# Implement: Demo
-
-![inline,autoplay](images/cg-flask-demo-480p.mov)
-
-
-^Note: While this runs, answer "Why not Docker?"
 
 ---
 
@@ -309,6 +275,8 @@ Risk averse: reputation, bad press, IG report, congress or potentially fired.
 
 ^ Systems need to be classified: Violaion of CIA: Low, Moderate, Hi. Depending on classification, then appropriate controls in place. 4004 pages
 
+
+
 ---
 
 [.build-lists: true]
@@ -316,11 +284,11 @@ Risk averse: reputation, bad press, IG report, congress or potentially fired.
 # Authorize: Controls
 
 * DataCenter: All 325 - You're responsible for:
-  * Height of fence
-  * Retina Scans
+  * Security Guards, PE-3(3)
+  * Disk wiping, MP-6(8)
 * IaaS: FedRAMP - You _inherit_ ~88 controls, but still 237:
-  * System logs
-  * Kernel patches 
+  * System logs, AU-12
+  * Kernel patches, SI-2
 * cloud.gov:
   * See next slide....
 
@@ -328,6 +296,13 @@ Risk averse: reputation, bad press, IG report, congress or potentially fired.
 
 [.footer:]
 ![](images/cg-faster-atos.png)
+
+^ If you want a second example: AC-21: Facilitate information sharing (customers need to set their own policies and training for their teams for the information about their applications that they can share)
+
+^ If you want a second example: AU-6 is "Audit review, analysis, and reporting" - cloud.gov provides a built-in logging feature, but customers need to review and analyze their own logs
+
+^ If you want a second example: CM-8 (1) is "updates the inventory of information system components as an integral part of component installations, removals, and information system updates" - cloud.gov automatically provides inventory information for cloud.gov usage (although customers should still double check to make sure it fits with their needs for inventories)
+
 
 ---
 
@@ -350,7 +325,7 @@ Let's revisit the mission...
 
 
 * A mission
-  * Housing for hurricane victims
+  * Housing for disaster victims
 * A team
   * Project / Product Managers
   * Designers / Developers
@@ -381,9 +356,11 @@ Let's revisit the mission...
 
 ---
 
-# 3 / Getting to :thumbsup:
+![](images/cloud-gov-event.png)
+# [fit] 3 / Getting to 👍🏾
 
 ---
+
 
 # Turning :thumbsdown: to :thumbsup:
 
@@ -401,7 +378,6 @@ Let's revisit the mission...
 ^You may have these reservations, or you may be dealing with folks who do. Many of these reservations, hesitancies, doubts come from some combination of misunderstanding, inaccurate prior knowledge, cognitive fallacies and so. Let's look at how to address some of them
 
 ---
-
 
 * **Concerns**
   * Sunk costs
@@ -465,72 +441,10 @@ The power of :cloud: is not in creating a resource, but in destroying it.
 
 ---
 
-![](images/current-customers.png)
-# 4 / Case Studies
-
-
----
-
-# FEC
-![](images/fec.png)
-
-
----
-
-# FEC
-
-* https://cloud.gov/overview/customer-stories/fec/
-* $1.4M -> $0.2M 
-* Better user experience
-* SAFe adoption
-
-
----
-
-![](images/fec.png)
-
----
-
-![](https://federalist-docs.18f.gov/uploads/partner-sites/arch-idmanagement-gov.png)
-# Federalist
-
----
-
-
-![fit](https://user-images.githubusercontent.com/10016577/28799555-144cd8dc-7617-11e7-9f3e-7eeb4dee2798.png)
-
----
-
-![](https://federalist-docs.18f.gov/uploads/partner-sites/arch-idmanagement-gov.png)
-
-
----
-
-# MOAR
-
-EdX class
-https://github.com/EngineerBetter/training-zero-to-hero
-https://github.com/CloudCredo/training-cf-zero-to-hero
-
-https://github.com/cloudfoundry/summit-training-classes -- which is home to:
-
-https://cloud-native-workshop.cfapps.io/agenda/
-https://basics-workshop.cfapps.io/agenda
-
-
----
-
-# Parking Lot
-
-| <br> |  <br> | 
-| :------- | ----: |
-| Pricing | How to find qualified contractors |
-| How :cloud:.gov supports industry | How is cloud.gov built/run? |
-| How to talk to InfoSec about :cloud:.gov | 
-
----
 
 # Pricing
+
+![inline](images/pricing.png)
 
 
 ---
@@ -544,19 +458,3 @@ https://basics-workshop.cfapps.io/agenda
 ---
 
 
-# How cloud.gov is built
-
-* SAFe
-* Terraform (https://github.com/18f/cg-provision)
-* BOSH/CloudFoundry
-* Concourse
-
-<!-- http://deckset-assets.s3.amazonaws.com/emoji-reference.md -->
-
----
-
-# Questions?
-
-- Peter Burkholder
-- pburkholder@pobox.com / peter.burkholder@gsa.com
-- @pburkholder (twitter, github, linked, 21.co)
