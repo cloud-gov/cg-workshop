@@ -287,7 +287,6 @@ cf scale cg-flask-demo -i 4
 
 ---
 
-
 # Authorize: Controls
 
 * DataCenter: All 325 - You're responsible for:
@@ -311,7 +310,6 @@ cf scale cg-flask-demo -i 4
 
 ^ SC - security controls, IA - id and auth, 
 
-
 ---
 
 # Authorize: ATO & Security
@@ -325,13 +323,38 @@ cf scale cg-flask-demo -i 4
 
 ---
 
-Let's revisit the mission...
+# Three Stages
+
+* **Procure**
+* **Implement**
+* **Authorize**
+
+
+
+^Why wouldn't you use ;cloud.gov ?
+
+---
+
+# [fit] Road map features
+
+* TIC ingress control
+* PIV/CAC enabled authentication
+* App environment security scanning 
+* Attach a persistent file volume to apps
+* AWS resource brokering
+* Built-in CI/CD service
+
+---
+
+![](images/cloud-gov-event.png)
+
+# Let's revisit the mission...
 
 ---
 
 ![right](images/18f-team-photo.jpg)
 
-# Suppose:
+# ~~Suppose~~ Realized
 
 * **A mission**
   * Housing for disaster victims
@@ -346,15 +369,14 @@ Let's revisit the mission...
 
 ---
 
-# Three Stages
+[.hide-footer: true]
 
-* **Procure**
-* **Implement**
-* **Authorize**
+![fit](images/cloud-gov.png)
 
-^Why wouldn't you use ;cloud.gov ?
 
 ---
+
+<!-- 
 
 ![](images/cloud-gov-event.png)
 # [fit] 3 / Getting to 👍🏾
@@ -450,5 +472,5 @@ The power of :cloud: is not in creating a resource, but in destroying it.
 | Vendors are excited because cloud.gov offers easy access to modern infrastructure. Enables small teams to deliver great work. | Agencies can set up smaller contracts because the vendor team does not need to maintain infrastructure. | Because cloud.gov uses the open source Cloud Foundry platform, more industry products can easily be run on cloud.gov by agencies. |
 
 ---
-
+-->
 
