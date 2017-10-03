@@ -1,0 +1,1350 @@
+<!doctype html>
+<html lang="en">
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    <meta charset="utf-8">
+
+<title>Slides</title>
+
+<meta name="description" content="">
+<meta name="author" content="">
+<meta name="generator" content="reveal-ck 3.8.0">
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+<link rel="stylesheet" href="css/reveal.css">
+<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+<!-- Code syntax highlighting -->
+<link rel="stylesheet" href="lib/css/zenburn.css">
+
+<link rel="stylesheet" href="css/reveal-ck.css">
+
+
+<!-- Printing and PDF exports -->
+<script>
+  var link = document.createElement( 'link' );
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+  document.getElementsByTagName( 'head' )[0].appendChild( link );
+</script>
+
+<!--[if lt IE 9]>
+<script src="lib/js/html5shiv.js"></script>
+<![endif]-->
+
+  </head>
+
+  <body>
+    <div class="reveal">
+  <!-- Any section element inside of this container is displayed as a slide -->
+  <div class="slides">
+    <section>
+
+<p>slidenumbers: true<br>
+theme: work,7<br>
+footer: <a href="https://github.com/18F/cg-workshop">https://github.com/18F/cg-workshop</a> 02-slides-lab.md<br>
+<img src="images/cloud-gov-event.png" alt=""></p>
+
+<h1>I want to have a <em>command line utility</em> installed</h1>
+<h1>So that I can <em>deploy apps into cloud.gov</em>
+</h1>
+
+<p>^ We have our login, now how do we run stuff? With a CLI</p>
+
+</section>
+<section>
+
+<h1>Why the <code>cf</code> CLI?</h1>
+
+<p>The Cloud Foundry (<em>CF</em>) command-line interface (CLI) is a multiplatform binary written in <code>Go</code> to interact with the <em>CF API</em>.  The CLI provides:</p>
+
+<ul>
+  <li>Automation</li>
+  <li>Collaboration</li>
+  <li>Corroboration</li>
+</ul>
+
+<p>^ You can put commands into files, with variables, and then run them.<br> You can share code by viewing text files, or even copy/paste, in ways you can’t with GUIs (nb: skip Snover anecdote). <br> And with version control you can corroborate that the change you mean to make is the change expressed by the code. <br> With the dashboard we provide overview tools and roles/permissions since those may be needed by project managers how are not using the CLI day-by-day</p>
+
+</section>
+<section>
+
+<h1>Lab 2: Install cloudfoundry tools and login to cloud.gov</h1>
+
+</section>
+<section>
+
+<h1>2.1 Select and install the appropriate installer for your computer:</h1>
+
+<p>Go to <a href="https://github.com/cloudfoundry/cli/releases">https://github.com/cloudfoundry/cli/releases</a> and select an <code>Installer</code> for your system. Download and go through the installation steps.</p>
+
+<p>On Macs, with Homebrew, you can use:</p>
+
+<pre><code class="language-sh">     brew cask install cloudfoundry-cli
+</code></pre>
+
+<p>On Workspaces, <code>cf</code> CLI is already installed.</p>
+
+<p>^ I have not shown the Installer steps as they’re different for different systems, and should be familiar to you at this point.</p>
+
+</section>
+<section>
+
+<h1>2.1 continued…</h1>
+
+<p>After the installer has finished, run the command:</p>
+
+<pre><code class="language-sh">&gt; cf
+</code></pre>
+
+<p>and you should see a list of command options.</p>
+
+<p>^ When you have CF installed and working as on the next slide, we’ll continue with authenticating your CLI to your <em>cloud.gov</em> account.</p>
+
+</section>
+<section>
+
+<h1>Check your work 2.1</h1>
+
+<p>You should see output similar the to the following:</p>
+
+<pre><code class="language-sh">PS /Users/peterburkholder&gt; cf
+cf version 6.26.0+9c9a261fd.2017-04-06, Cloud Foundry command line tool
+Usage: cf [global options] command [arguments...] [command options]
+
+Before getting started:
+  config    login,l      target,t
+  help,h    logout,lo
+
+... [snip] ...
+</code></pre>
+
+<p>^ Instructor: wait here until most partipants have CF installed.</p>
+
+</section>
+<section>
+
+<h1>2.2 Login to cloud.gov with the <em>cf</em> CLI</h1>
+
+<p>You’ll enter the command below, and you’ll be directed to an <em>authentication URL</em>.</p>
+
+<pre><code class="language-powershell">cf login --sso -a https://api.fr.cloud.gov
+</code></pre>
+
+<p>Confirm you’re logged in by seeing the <em>orgs</em> you belong to:</p>
+
+<pre><code class="language-powershell">cf orgs
+</code></pre>
+
+</section>
+<section>
+
+<h1>Check your work 2.2</h1>
+
+<pre><code>&gt; cf login --sso -a https://api.fr.cloud.gov
+API endpoint: https://api.fr.cloud.gov
+
+One Time Code ( Get one at https://login.fr.cloud.gov/passcode )&gt;
+</code></pre>
+
+<p>Visit the URL <a href="https://login.fr.cloud.gov/passcode">https://login.fr.cloud.gov/passcode</a>, complete the login to <em>cloud.gov</em>, and you’ll get a one-time passcode. Copy/paste the passcode back into the CLI, as show <a href="https://s3-us-gov-west-1.amazonaws.com/cg-public/cg-otp-login-fast.mp4">in this 30s video</a></p>
+
+</section>
+<section>
+
+<h1><em>cloud.gov CLI login</em></h1>
+
+<p><img src="https://s3-us-gov-west-1.amazonaws.com/cg-public/cg-otp-login-fast.mp4" alt=""></p>
+
+<p>^ View login video at <a href="https://s3-us-gov-west-1.amazonaws.com/cg-public/cg-otp-login-fast.mp4">https://s3-us-gov-west-1.amazonaws.com/cg-public/cg-otp-login-fast.mp4</a></p>
+
+</section>
+<section>
+
+<h1>Check your work 2.2, continued</h1>
+
+<pre><code class="language-powershell">&gt; cf orgs
+Getting orgs as peter.burkholder@cao.gov...
+
+name
+sandbox-cao
+</code></pre>
+
+</section>
+<section>
+
+<h1>Further exploration</h1>
+
+<p>Once you have <code>cf orgs</code> working, try the following:</p>
+
+<ul>
+  <li>
+<code>cf serviecs</code>: Auto-suggest on <em>misspellings</em>
+</li>
+  <li>
+<code>cf help</code>: Explore other commands
+    <ul>
+      <li>
+<code>cf routes -h</code>: Explore <em>modal help</em> for commands</li>
+    </ul>
+  </li>
+  <li>
+<code>cf curl "/v2/spaces"</code>: Peek into the API internals<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>
+</li>
+</ul>
+
+<p>^Instructor: Wait here until most folks have <code>cf orgs</code> working</p>
+
+</section>
+<section>
+
+<p><img src="images/cloud-gov-event.png" alt=""></p>
+
+<h1>I want my website to be <em>accessible at a public URL</em>
+</h1>
+<h1>So that the <em>American people</em> can read it</h1>
+
+</section>
+<section>
+
+<h1>Lab 3: Download <em>workshop labs</em> and deploy a <em>static website</em> to <em>yourname</em>.app.cloud.gov</h1>
+
+<p>Our simplest example. We’ll get our <em>lab materials</em>, then use <code>cf push</code> to send the files to <em>cloud.gov</em>.  Cloud.gov will package the site and start to serve it.</p>
+
+<p>^ We have working environment, a cloud.gov account, a working <code>cf</code> connection to the cloud.gov account. Now we need to materials for the rest of our labs. Then we can release a website.</p>
+
+</section>
+<section>
+
+<h1>3.1: Download labs</h1>
+
+<p>Mac/Linux shell:</p>
+
+<pre><code class="language-shell">cd $HOME
+curl -Lo cgw.zip http://bit.ly/cgw-zip
+unzip cgw.zip
+cd cg-workshop-master
+</code></pre>
+
+<p>Windows Powershell:</p>
+
+<pre><code class="language-powershell">cd $HOME
+iwr -o cgw.zip https://bit.ly/cgw-zip
+7z x cgz.zip   # If no 7zip, use File Explorer to unpack
+cd cg-workshop-master
+</code></pre>
+
+<p>^ Instructor: Run through the entire set of slides then wait for participants to catch up</p>
+
+</section>
+<section>
+
+<h1>Check your work 3.1</h1>
+
+<p>Run <code>ls</code>. You should see output similar to the following:</p>
+
+<pre><code class="language-powershell">PS D:\Users\cao.burkholder\cg-workshop-master&gt; ls
+
+    Directory: D:\Users\cao.burkholder\cg-workshop-master
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----        9/25/2017   9:13 PM                admin
+d-----        9/25/2017   9:13 PM                images
+d-----        9/25/2017   9:13 PM                lab01-setup
+d-----        9/25/2017   9:13 PM                lab03-site
+d-----        9/26/2017  10:49 PM                lab04-app
+d-----        9/26/2017  10:49 PM                lab05-state
+...
+</code></pre>
+
+</section>
+<section>
+
+<h1>Lab 3.2: Deploy static website</h1>
+
+<p>Don’t literally use <em>myfname-lname</em> below. Use your own name like, <em>jane-doe</em>:</p>
+
+<pre><code>cf push -f lab03-site/manifest.yml myfname-lname
+</code></pre>
+
+<p>^ If you do use myfname-lname, you’ll run into a <code>route conflict</code> with someone else trying to use that same name.`</p>
+
+</section>
+<section>
+
+<p>[.build-lists: true]</p>
+<h1>What happens when I <em>cf push</em>? (v1.0)</h1>
+
+<ul>
+  <li>Upload: Files are sent to CF for new app <em>myfname-lname</em>
+    <ul>
+      <li>
+<code>-f lab-03-site/manifest.yml</code> is a <em>deployment manifest</em>
+</li>
+    </ul>
+  </li>
+  <li>Staging:
+    <ul>
+      <li>Artifact is created (droplet)</li>
+    </ul>
+  </li>
+  <li>Running:
+    <ul>
+      <li>A <em>route</em> is created to the app</li>
+      <li>Site starts on an web host</li>
+      <li>Site serves web requests</li>
+    </ul>
+  </li>
+</ul>
+
+</section>
+<section>
+
+<p><img src="images/app_push_flow_diagram_diego.png" alt="fit"></p>
+
+<p>^ You run a <code>cf</code> command. Terms: “Binary data store” “database”<br>Applications are run in ‘containers’ hosted in ‘Cells’. First a staging cell builds your application and all the dependencies, and stores in the binary store. Then ‘Running’ cell can pick it up and run one or more copies of it.</p>
+
+</section>
+<section>
+
+<h1>Check your work 3.2</h1>
+
+<p>The <code>cf push</code> results should resemble:</p>
+
+<pre><code>$ cf push -f lab03-site/manifest.yml peter-burkholder
+Creating app peter-burkholder in org s-cao / space p.burk...
+OK
+Uploading peter-burkholder...
+... [snip]...
+rrequested state: started
+instances: 1/1
+usage: 16M x 1 instances
+urls: peter-burkholder.app.cloud.gov
+last uploaded: Tue Sep 26 14:27:12 UTC 2017
+stack: cflinuxfs2
+buildpack: staticfile
+
+     state     since                    cpu    memory        disk          details
+#0   running   2017-09-26 10:27:29 AM   0.0%   3.9M of 16M   6.2M of 32M
+</code></pre>
+
+<p>[.footer: continued…]</p>
+
+</section>
+<section>
+
+<h1>Check your work 3.2, continued</h1>
+
+<p><img src="images/hello-cloud-gov.png" alt="right,fit"></p>
+
+<p>Now try accessing your site at</p>
+
+<p><a href="https://fname-lname.app.cloud.gov">https://fname-lname.app.cloud.gov</a></p>
+
+<p><br><br>
+<br><br>
+(If you care to try from command line…):</p>
+
+<pre><code class="language-powershell">&gt; curl https://fname-lname.app.cloud.gov
+&lt;body&gt;
+  &lt;h1&gt;Hello from cloud.gov&lt;/h1&gt;
+&lt;/body/
+</code></pre>
+
+</section>
+<section>
+
+<h1>Further exploration</h1>
+
+<p>When you can access your site, try the following:</p>
+
+<ul>
+  <li>Try HTTP, e.g., <code>http://myfname-lname.app.cloud.gov</code>
+    <ul>
+      <li>Does it work? Is it secured?</li>
+    </ul>
+  </li>
+  <li>
+<code>cf app myfname-lname</code>
+    <ul>
+      <li>What info do you get about your app?</li>
+    </ul>
+  </li>
+  <li>
+<code>cf push -f lab03-site/manifest.yml --random-route myfname-lname</code>
+    <ul>
+      <li>What URL do you use now?</li>
+    </ul>
+  </li>
+</ul>
+
+<p>^ Instructor: Wait here for most participants to reach their static page.</p>
+
+</section>
+<section>
+
+<p><img src="images/cloud-gov-event.png" alt=""></p>
+
+<h1>BREAK</h1>
+
+<p>We’ll break so folks can catch up with:</p>
+
+<ul>
+  <li>workstation setup</li>
+  <li>account creation - can you login to:<br>
+ <a href="https://dashboard.fr.cloud.gov">https://dashboard.fr.cloud.gov</a>?</li>
+  <li>CLI install - can you run?<br>
+ `   cf   `</li>
+  <li>labs download - can you ?<br>
+<code>   cd $HOME/cg-workshop-master  </code>
+</li>
+</ul>
+
+<p>You can skip doing <em>cf push</em> as we’ll pick up from there in the next section.</p>
+
+</section>
+<section>
+
+<p><img src="images/cloud-gov-event.png" alt=""></p>
+
+<h1>I want to run a <em>dynamic webapp</em>
+</h1>
+<h1>So that users can <em>interact</em> with us</h1>
+
+</section>
+<section>
+
+<h1>Lab 4: Sinatra Application</h1>
+
+<p>We’ll use <em>cf push</em> again, but this time to <em>stage</em> and run a dynamic web application. We’ll see how to use the <em>manifest.yml</em> to set deployment options.</p>
+
+<p>The manifest provides application <em>metadata</em> to CloudFoundry. We use it for non-default settings so we don’t have to always specify them on the command line, and we can bundle the manifest with the application.</p>
+
+<p>^ As with static site, let’s review the slides, then we’ll pause for everyone to run the commands<br> Sinatra is a <em>ruby</em> web framework. The deployment process is the same for any supported Cloud Foundry language.  <br>First, let’s revisit and update what happens with CF PUSH:</p>
+
+</section>
+<section>
+
+<p>[.build-lists: true]</p>
+
+<h1>What happens when I <em>cf push</em>? (v2.0)</h1>
+
+<ul>
+  <li>Upload: <strong>App</strong> files are sent to CF for new app <em>myfname-lname</em>
+</li>
+  <li>Staging:
+    <ul>
+      <li>
+<strong>Executable</strong> artifact is created (droplet)</li>
+      <li><strong>All build dependencies are bundled into <em>droplet</em></strong></li>
+    </ul>
+  </li>
+  <li>Running:
+    <ul>
+      <li>A <em>route</em> is created to the <strong>app</strong> <del>site</del>
+</li>
+      <li>
+<del>Site</del> <strong>App</strong> starts on an <del>web</del> <strong>app</strong> host</li>
+      <li>
+<del>Site</del> <strong>App</strong> serves web requests <strong>(if it binds to TCP port)</strong>
+</li>
+    </ul>
+  </li>
+</ul>
+
+<p>^The staging step of bundling <em>build dependencies</em> is part of the <em>buildpack</em> job, as we’ll discuss in a moment. Also, apps can also run without binding, or listening, on a network port. These are <em>worker</em> applications that’s don’t directly serve traffic. Will Slack will mention those with Federalist.</p>
+
+</section>
+<section>
+
+<h1>Buildpacks create a runnable artifact called a droplet</h1>
+
+<p>App Files + Runtime Dependencies = App Artifact (droplet)</p>
+
+<h1>Apps are started on specialized VMs called cells</h1>
+
+<p>If it’s a web process, it binds to a TCP port.<br>
+Instances are distributed across multiple cells.<br>
+The Router distributes traffic across instances.</p>
+
+<p>^A couple points about how CF pulls things together  <br>If you look at the labs04-app/Gemfile you’ll see a lot of dependencies that the buildpack handles. Buildpacks can be used so there are no online dependencies in your application push.  <br>The apps run in container instances that can be migrated between cells for resource management and uptime.</p>
+
+</section>
+<section>
+
+<h1>Where does the app run?</h1>
+
+<pre><code>                           CONSUMER
+
+                              |
+
+                            ROUTER
+
+                            /    \
+                           /      \
+                          /        \
+                         /          \
+
+                      CELL 1       CELL 2
+
+                        |            |
+      APP A INSTANCE 1 -|            |- APP A INSTANCE 2
+      APP B INSTANCE 2 -|            |- APP B INSTANCE 1
+</code></pre>
+
+</section>
+<section>
+
+<h1>Lab 4.1:  Review the <em>deployment manifest</em>
+</h1>
+
+<pre><code class="language-powershell">more lab04-app/manifest.yml
+</code></pre>
+
+<p>How much memory/disk are we saving compared to defaults of 512Mb RAM and 1024Mb disk quota?</p>
+
+</section>
+<section>
+
+<h1>Check your work 4.1</h1>
+
+<p>The manifest should contain:</p>
+
+<pre><code class="language-yaml">
+&lt;div&gt;DIVIDER&lt;/div&gt;
+
+applications:
+- name: cglab
+  memory: 64m
+  disk-quota: 128m
+  random-route: true
+#  buildpack: ruby_buildpack
+</code></pre>
+
+<p>All of us will have an app, <em>cglab</em>, but we can’t all have it <em>routed</em> to <br>
+<a href="https://cglab.app.cloud.gov">https://cglab.app.cloud.gov</a>.</p>
+
+<p><em>random-route</em> will append random words to the URL.</p>
+
+<p>^ We use 1/8th of the default resource allocation.</p>
+
+</section>
+<section>
+
+<h1>Lab 4.2 Push the application</h1>
+
+<pre><code class="language-powershell">cf push -f lab04-app/manifest.yml cglab
+</code></pre>
+
+</section>
+<section>
+
+<h1>Check your work 4.2, 1/3</h1>
+
+<p>The cf push results should resemble those below. Note all the buildpacks (and use of buildpack detection)</p>
+
+<p>```powershell, [.highlight: 9]<br>
+$ cf push -f lab04-app/manifest.yml cglab<br>
+Using manifest file lab04-app/manifest.yml cglab<br>
+… [snip] …<br>
+Starting app cglab in org sandbox-cao / space peter.burkholder as peter.burkholder@cao.gov…<br>
+Downloading nodejs_buildpack…<br>
+Downloading php_buildpack…<br>
+Downloading dotnet_core_buildpack…<br>
+Downloading java_buildpack…<br>
+Downloaded ruby_buildpack (81.6K)<br>
+… [snip] …</p>
+<pre><code>
+[.footer: continued....]
+
+
+&lt;div&gt;DIVIDER&lt;/div&gt;
+
+
+# check your work 4.2, continued 2/3
+
+The cf push output should resemble what's below. Note the highlighted `urls`. Since we use `random-route` the URL here is [https:/cglab-confessable-pardner.app.cloud.gov](https://cglab-confessable-pardner.app.cloud.gov)
+
+```powershell, [.highlight: 4]
+...
+instances: 1/1
+usage: 64M x 1 instances
+urls: cglab-confessable-pardner.app.cloud.gov
+last uploaded: Thu Sep 21 01:48:46 UTC 2017
+stack: cflinuxfs2
+buildpack: ruby
+
+     state     since                    cpu    memory      disk      details
+#0   running   2017-09-20 09:49:19 PM   0.0%   0 of 64M   0 of 128M 
+</code></pre>
+
+<p>[.footer: continued….]</p>
+
+<hr>
+
+<h1>check your work 4.2, continued 3/3</h1>
+
+<p>Interact with the webpage at <br><br>
+<a href="https://cglab-RANDOM-WORDS.app.cloud.gov">https://cglab-RANDOM-WORDS.app.cloud.gov</a> <br><br>
+e.g., <br><br>
+<a href="https://cglab-confessable-pardner.app.cloud.gov">https:/cglab-confessable-pardner.app.cloud.gov</a></p>
+
+<p><img src="lab04-app/images/webapp.png" alt="right,fit"></p>
+
+</section>
+<section>
+
+<h1>Lab 4.3 Review the app status and health</h1>
+
+<p>Run:</p>
+
+<pre><code>cf app cglab
+</code></pre>
+
+<p>How much memory and disk is it using?</p>
+
+</section>
+<section>
+
+<h1>Check your work 4.3</h1>
+
+<p>The <em>cf app</em> output should resemble:</p>
+
+<p>```powershell, [.highlight: 6, 13]<br>
+Showing health and status for app cglab in org sandbox-cao</p>
+
+<p>name:              cglab<br>
+requested state:   started<br>
+instances:         1/1<br>
+usage:             64M x 1 instances<br>
+routes:            cglab-confessable-pardner.app.cloud.gov<br>
+last uploaded:     Wed 20 Sep 22:06:14 EDT 2017<br>
+stack:             cflinuxfs2<br>
+buildpack:         ruby</p>
+
+<pre><code> state     since                  cpu    memory          disk          details #0   running   2017-09-21T02:06:44Z   0.0%   19.2M of 64M   80.8M of 128M  ```
+</code></pre>
+
+</section>
+<section>
+
+<h1>Further exploration</h1>
+
+<p>Once you’ve visited your app and viewed <code>cf app cglab</code>, try the following:</p>
+
+<ul>
+  <li>Run <code>cf buildpacks</code>. What languages are available by default?</li>
+  <li>Uncomment the <code>manifest.yml</code> line with <code>buildpack</code>, then run <code>cf push</code> and check status with <code>cf app cglab</code>. What’s changed in staging or application status?</li>
+  <li>Does the updated manifest change release time? Try <code>time cf push</code> (shell) or <code>Measure-Command {cf push}</code> (powershell)</li>
+</ul>
+
+<p>^ Instructor: Pause here</p>
+
+</section>
+<section>
+
+<p><img src="images/cloud-gov-event.png" alt=""></p>
+
+<h1>I want to store data in a <em>service</em>
+</h1>
+<h1>So that it is persistent and shared</h1>
+
+</section>
+<section>
+
+<h1>Lab 5. I can share persistent data between app instances</h1>
+
+<p>First we’ll see the <em>services</em> available to us in the <em>marketplace</em>, then use <em>create-service</em> to provision a simple Redis data store.</p>
+
+<p>We’ll then <em>bind</em> that service to our application.</p>
+
+<p>Our application wll use its <em>environment variables</em> to determine its connection information</p>
+
+</section>
+<section>
+
+<h1>Lab 5.1 Review the available <em>services</em>
+</h1>
+
+<p>Run the command below. How many Redis <em>services</em> are there?</p>
+
+<pre><code>   cf marketplace
+</code></pre>
+
+<p>Examine <code>redis32</code> service details with the <code>-s</code> option.</p>
+
+<pre><code>   cf marketplace -s redis32
+</code></pre>
+
+<p>What’s the max memory of the <code>micro</code> <em>plan</em>?</p>
+
+</section>
+<section>
+
+<h1>Check your work 5.1</h1>
+
+<pre><code>&gt; cf marketplace
+Getting services from marketplace in org sandbox-cao / space p.burkholder ...
+OK
+
+...
+redis28         standard         An open source in-memory data structure store.
+redis32         micro, standard-ha, standard       An open source in-memory database.
+</code></pre>
+
+<p>^ There are two Redis <em>services</em>, <code>redis28</code> and <code>redis32</code>.</p>
+
+</section>
+<section>
+
+<h1>Check your work 5.1, continued 2/2</h1>
+
+<pre><code>&gt; cf marketplace -s redis32
+Getting service plan information for service redis32 as peter.burkholder@cao.gov...
+OK
+
+service plan   description                                                 free or paid
+standard-ha    Redis 3.2 Redis Sentinel, persistent storage, 512Mb limit   free
+standard       Redis 3.2, persistent storage, 512Mb memory limit           free
+micro          Redis 3.2, persistent storage, 64Mb memory limit            free
+</code></pre>
+
+<p>^ The  <em>micro</em>  plan is capped at 64Mb (enough for ~800,000 short keys)</p>
+
+</section>
+<section>
+
+<h1>Lab 5.2: Create a Redis service with <em>create-service</em>
+</h1>
+
+<p>The format for <em>create-service redis32</em> is:</p>
+
+<pre><code>   cf create-service redis32  PLAN  NAME 
+</code></pre>
+<p>Run:</p>
+
+<pre><code>   cf create-service redis32 micro cglab-redis
+</code></pre>
+
+<p>Wait one minute, then check your service with:</p>
+
+<pre><code>   cf service cglab-redis
+</code></pre>
+
+</section>
+<section>
+
+<h1>Check your work 5.2</h1>
+
+<pre><code>&gt; cf create-service redis32  micro cglab-redis
+Creating service instance cglab-redis in org sandbox-cao 
+OK
+
+Create in progress. Use 'cf services to check
+</code></pre>
+
+<p>```[.highlight: 1,7]</p>
+<blockquote>
+  <p>cf service cglab-redis</p>
+</blockquote>
+
+<p>Service instance: cglab-redis<br>
+Service: redis32<br>
+Bound apps:<br>
+… [snip] …<br>
+Status: create succeeded<br>
+Started: 2017-09-21T14:40:57Z<br>
+Updated: 2017-09-21T14:42:01Z</p>
+<pre><code>
+
+&lt;div&gt;DIVIDER&lt;/div&gt;
+
+
+# Lab 5.3 Associate service and app with _bind-service_
+
+The app, _cglab_ needs to know about _cglab-redis_. The _bind-service_ shares service information by setting _environment variables_ in the app container.
+
+Run: 
+
+</code></pre>
+<p>cf bind-service cglab cglab-redis</p>
+<pre><code>
+View the environment variables in the app with:
+
+</code></pre>
+<p>cf env cglab</p>
+<pre><code>
+What's the first service under `VCAP_SERVICES`?
+
+
+&lt;div&gt;DIVIDER&lt;/div&gt;
+
+
+# Check your work 5.3
+
+Your results should resemble:
+
+``` [.highlight: 1,6,12,13]
+&gt; cf bind-service cglab cglab-redis
+Binding service cglab-redis to app cglab in sandbox-cao 
+OK
+TIP: Use 'cf restage cglab' to ensure your changes ...
+
+&gt; cf env cglab
+Getting env variables for app cglab in sandbox-cao
+OK
+
+System-Provided:
+{
+ "VCAP_SERVICES": {
+  "redis32": [
+...
+</code></pre>
+
+<p>^ The first service is <em>redis32</em></p>
+
+</section>
+<section>
+
+<h1>Lab 5.4 Push the new version of our app</h1>
+
+<p>Now we can push the version of the app that uses the data store. Run:</p>
+
+<pre><code>   cf push cglab -f lab05-state/manifest.yml
+</code></pre>
+
+<p>Has the app’s URL changed?</p>
+
+<p>Visit your app at the URL. Refresh page multiple times. What does the app do?</p>
+
+</section>
+<section>
+
+<h1>Check your work 5.4</h1>
+
+<p>``` [.highlight: 1, 12, 17,18]</p>
+<blockquote>
+  <p>cf push cglab -f lab05-state/manifest.yml<br>
+Using manifest file lab05-state/manifest.yml</p>
+</blockquote>
+
+<p>Updating app cglab in org sandbox-cao / space peter.burkholder <br>
+OK</p>
+
+<p>Uploading cglab…<br>
+…<br>
+requested state: started<br>
+instances: 1/1<br>
+usage: 64M x 1 instances<br>
+urls: cglab-gastrocnemian-calefaction.app.cloud.gov<br>
+last uploaded: Wed Sep 27 03:24:38 UTC 2017<br>
+stack: cflinuxfs2<br>
+buildpack: ruby_buildpack</p>
+
+<pre><code> state     since                    cpu    memory        disk         #0   running   2017-09-26 11:25:11 PM   0.0%   980K of 64M   1.5M of 128M ```
+</code></pre>
+
+</section>
+<section>
+
+<h1>Check your work 5.4, continued</h1>
+
+<p><img src="lab05-state/images/running.png" alt="fit,right"></p>
+
+</section>
+<section>
+
+<h1>Lab 5.5 Scaling</h1>
+
+<p>Since CF stores executable artifacts and runs them in containers, you can quickly <em>scale</em> your app to meet demand.</p>
+
+<p>Scale <em>cglab</em> to two instances, then immediately, refresh the <em>cglab</em> webapp page multiple times</p>
+
+<pre><code>   cf scale cglab -i 2
+</code></pre>
+
+<p>How long until a new instance was available?</p>
+
+</section>
+<section>
+
+<p><img src="lab05-state/images/scale.png" alt="right,fit"></p>
+<h1>Check your work 5.5</h1>
+
+<p>Scaling output should resemble:</p>
+
+<pre><code>&gt; cf scale cglab -i 2
+Scaling app cglab in org sandbox-cao 
+OK
+</code></pre>
+
+<p>About 10 seconds for new instance to come up</p>
+
+<hr>
+
+<h1>Review: Where does the app run?</h1>
+
+<pre><code>                           CONSUMER
+
+                              |
+
+                            ROUTER
+
+                            /    \
+                           /      \
+                          /        \
+                         /          \
+
+                      CELL 1       CELL 2
+
+                        |            |
+      APP A INSTANCE 0 -|            |- APP A INSTANCE 1
+      APP B INSTANCE 1 -|            |- APP B INSTANCE 0
+</code></pre>
+
+</section>
+<section>
+
+<h1>Further exploration</h1>
+
+<p>Once you’ve seen the app count visits per scaled instance:</p>
+
+<ul>
+  <li>Go to your app’s URL + ‘/env’<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup>. E.g.<br>
+http://cglab….app.cloud.gov/env</li>
+  <li>Can you use <code>cf set-env</code> to add new variables?
+    <ul>
+      <li>Hint: You’ll need <code>cf restage</code> for your app to pick them up.</li>
+    </ul>
+  </li>
+  <li>Try scaling the app to four, then back to two. Which instances are kept?</li>
+  <li>Can you scale to zero?</li>
+</ul>
+
+</section>
+<section>
+
+<p><img src="images/cloud-gov-event.png" alt=""></p>
+
+<h1>I want to know what my app is <em>doing</em>
+</h1>
+<h1>So that I can <em>debug</em> it</h1>
+
+</section>
+<section>
+
+<h1>Lab 6. I can investigate my apps to determine the cause of errors</h1>
+
+<p>Let’s look at application <em>logs</em>, <em>events</em> and live debugging over <em>ssh</em>.</p>
+
+<p>In the long-term, you’ll need to do application maintenance via <em>restage</em> to pick up Buildpack updates</p>
+
+</section>
+<section>
+
+<h1>Lab 6.1: View live application logs</h1>
+
+<p>View current app activity:</p>
+
+<pre><code>  cf logs cglab
+</code></pre>
+
+<p>Then interact with your <em>cglab</em> webpage. Press <code>Ctrl-C</code> to stop log streaming</p>
+
+<p>Do you see any logs from the router? From the app?</p>
+
+</section>
+<section>
+
+<h1>Check your work 6.1</h1>
+
+<pre><code>&gt; cf logs cglab
+2017-09-27T12:04:03.18[RTR/1] OUT
+2017-09-27T12:04:03.43[RTR/0] OUT cglab-gastro-action.app.cloud.gov
+...
+</code></pre>
+
+<p>The app wasn’t written to emit logs (which is poor practice), so you may only see RTR logs except for the occasional APP error.</p>
+
+<p>All cloud.gov logs are automatically streamed to an internal Elasticsearch/Kibana cluster for search/query.</p>
+
+</section>
+<section>
+
+<h1>Lab 6.2: View historical logs in Kibana</h1>
+
+<ul>
+  <li>Visit: <a href="https://logs.fr.cloud.gov">https://logs.fr.cloud.gov</a>
+</li>
+  <li>Enter <code>ERR</code> in the Search box, then search</li>
+  <li>Click the ▶︎ triangle to expand, then seek <em><a href="https://github.com/message" class="user-mention">@message</a></em>
+</li>
+  <li>What error is our <em>cglab</em> application giving?</li>
+</ul>
+
+<p><img src="lab05-state/images/kibana-search.png" alt="inline, 96%"></p>
+
+</section>
+<section>
+
+<p><em>Check your work 6.2 1/2</em></p>
+
+<p><img src="lab05-state/images/kibana-results.png" alt="inline"></p>
+
+</section>
+<section>
+
+<p><em>Check your work 6.2 2/2</em></p>
+
+<p><img src="lab05-state/images/kibana-view-msg.png" alt="inline"></p>
+
+</section>
+<section>
+
+<h1>Lab 6.3: Application Events</h1>
+
+<p><em>Events</em> are generated by CloudFoundry, <em>about</em> your application.</p>
+
+<p>View application events. Do you see any CRASH events?</p>
+
+<pre><code>   cf events cglab
+</code></pre>
+
+</section>
+<section>
+
+<h1>Check your work 6.3</h1>
+
+<pre><code>&gt;  cf events cglab
+Getting events for app cglab in org sandbox-cao / space peter.burkholder as p.b...
+
+time                          event                      actor          description
+2017-09-26T23:28:35.00-0400   audit.app.update           p...@cao.gov   instances: 2
+2017-09-26T23:25:00.00-0400   audit.app.droplet.create   p...@cao.gov
+2017-09-26T23:24:46.00-0400   audit.app.update           p...@cao.gov   state: STARTED
+</code></pre>
+
+<p>You shouldn’t see any CRASH events</p>
+
+</section>
+<section>
+
+<h1>Lab 6.4: SSH to debug <em>cglab</em>
+</h1>
+
+<p>Connect to your <em>cglab</em> application<sup id="fnref:3"><a href="#fn:3" class="footnote">3</a></sup></p>
+
+<pre><code>   cf ssh cglab
+</code></pre>
+
+<p>You’ll be connected a Linux container. To see all processes, run the command below. How many processes are running?</p>
+
+<pre><code>   ps -ef
+</code></pre>
+
+</section>
+<section>
+
+<h1>Check your work, 6.4</h1>
+
+<p>```[.highlight: 1,2]<br>
+$ cf ssh cglab<br>
+vcap@96b3e4b6-d74a-4d64-4579-3567:~$ ps -ef<br>
+UID          PID    PPID  C STIME TTY          TIME CMD<br>
+root           1       0  0 05:01 ?        00:00 /proc/self/exe init<br>
+vcap           6       0  0 05:02 ?        00:00 /tmp/lifecycle/diego-sshd …<br>
+vcap          11       0  0 05:02 ?        00:00 /bin/bash /home/vcap/app/bin…<br>
+vcap          33      11  0 05:02 ?        00:00 /bin/bash /home/vcap/app/bin…<br>
+vcap          40      33  0 05:02 ?        00:05 /home/vcap/app/vendor/bundle…<br>
+vcap       16109       6  0 18:23 pts/1    00:00 /bin/bash<br>
+vcap       16120   16109  0 18:23 pts/1    00:00 ps -ef</p>
+<pre><code>
+About 7 or 8 processes running. To end a session, run:
+
+</code></pre>
+<p>exit</p>
+<pre><code>
+
+&lt;div&gt;DIVIDER&lt;/div&gt;
+
+
+# Further exploration, Lab 6
+
+Once you've seen _logs_, _events_ and used _ssh_, try:
+
+* Maintenance: Your app may need a new version of Ruby/Java/etc. You can update a Buildpack with:&lt;br&gt;   `cf restage cglab`
+* Use built-in help to find ways to disable SSH. Try &lt;br&gt;   `cf help -a`
+* View cloud.gov status: [https://cloudgov.statuspage.io](https://cloudgov.statuspage.io)
+
+
+&lt;div&gt;DIVIDER&lt;/div&gt;
+
+
+![](images/cloud-gov-event.png)
+
+# I want to test and release app code continually
+# so that we can attain velocity, reliability and security
+
+
+&lt;div&gt;DIVIDER&lt;/div&gt;
+
+
+# 7. Continuous Integration and Delivery
+
+(Demo as time permits)
+
+
+&lt;div&gt;DIVIDER&lt;/div&gt;
+
+
+![](images/cloud-gov-event.png)
+
+# I want to manage unused resources,
+# so that I am cost-effective and secure
+
+
+&lt;div&gt;DIVIDER&lt;/div&gt;
+
+
+# Lab 8: Clean-up
+
+Unused apps and resources expend resources and may present an attack surface.
+
+We'll clean up from today with _delete_ (app), _delete-services_ and _delete-orphaned-routes_.
+
+Most of these _delete_ commands expect a _Y_ confirmation.
+
+
+&lt;div&gt;DIVIDER&lt;/div&gt;
+
+
+# Lab 8.1: Delete apps with _cf delete_
+
+List all your apps with:
+
+</code></pre>
+<p>cf apps</p>
+<pre><code>
+Then delete each one, e.g.:
+
+</code></pre>
+<p>cf delete cglab<br>
+   cf delete myfname-lname # use the real app name</p>
+<pre><code>
+
+&lt;div&gt;DIVIDER&lt;/div&gt;
+
+
+# Check your work, 8.1
+
+``` [.highlight: 1,8,9]
+&gt; cf apps
+Getting apps in org sandbox-cao / space peter.burkholder as peter.burkholde
+...
+name            requested   instances   memory   disk   urls
+cao-burkholder  started     1/1         16M      32M    cao-burkholder.app.
+cglab           started     2/2         64M      128M   cglab-gastro-action
+
+&gt; cf delete cglab
+Really delete the app cglab?&gt; y
+Deleting app cglab in org sandbox-cao / space peter.burkholder as peter.bur
+OK
+</code></pre>
+
+</section>
+<section>
+
+<h1>Lab 8.2: Delete services</h1>
+
+<p>List all your services with:</p>
+
+<pre><code>   cf services
+</code></pre>
+
+<p>Then delete each one, e.g.:</p>
+
+<pre><code>   cf delete-service cglab-redis
+</code></pre>
+
+</section>
+<section>
+
+<h1>Check your work, 8.2</h1>
+
+<p>``` [.highlight: 1,8,9]</p>
+<blockquote>
+  <p>cf services<br>
+Getting services in org sandbox-cao / space peter.burkholder as<br>
+OK</p>
+</blockquote>
+
+<p>name          service   plan       bound apps   last operation<br>
+cglab-redis   redis32   standard                create succeeded</p>
+
+<blockquote>
+  <p>cf delete-service cglab-redis<br>
+Really delete the service cglab-redis?&gt; y<br>
+Deleting service cglab-redis in org sandbox-cao / space peter.b<br>
+OK<br>
+```</p>
+</blockquote>
+
+</section>
+<section>
+
+<h1>Lab 8.3: Delete unused routes</h1>
+
+<p>CloudFoundry automatically creates <em>routes</em> for your web application. List your routes with:</p>
+
+<pre><code>   cf routes
+</code></pre>
+
+<p>Routes that no longer connect to apps are <em>orphaned</em>. Clean them all up with:</p>
+
+<pre><code>   cf delete-orphaned-routes
+</code></pre>
+
+</section>
+<section>
+
+<h1>Check your work, 8.3</h1>
+
+<p>``` [.highlight: 1,8,9]</p>
+<blockquote>
+  <p>cf routes<br>
+Getting routes for org sandbox-cao / space peter.burkholder as peter.bur</p>
+</blockquote>
+
+<p>space              host                     domain          apps        <br>
+peter.burkholder   peterburkho              app.cloud.gov<br>
+peter.burkholder   cglab-gastralefaction    app.cloud.gov</p>
+
+<blockquote>
+  <p>cf delete-orphaned-routes<br>
+Really delete orphaned routes? [yN]: y<br>
+Getting routes as peter.burkholder@cao.gov …</p>
+</blockquote>
+
+<p>Deleting route peterburkho.app.cloud.gov …<br>
+Deleting route cglab-gastrofaction.app.cloud.gov …<br>
+OK</p>
+<pre><code>
+
+&lt;div&gt;DIVIDER&lt;/div&gt;
+
+
+![](images/cloud-gov-event.png)
+
+# Congratulations!
+
+All of these should show no active resources:
+
+</code></pre>
+<p>cf apps<br>
+   cf services<br>
+   cf routes<br>
+```</p>
+
+<p>You have completed the workshop <br>
+and tidied up after yourself!</p>
+
+</section>
+<section>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Docs</th>
+      <th style="text-align: left"> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">cloud.gov docs: <a href="https://cloud.gov/docs/">https://cloud.gov/docs/</a><br><br><br><strong>Books</strong>
+</td>
+      <td style="text-align: left">Cloud Foundry docs: <a href="https://docs.cloudfoundry.org">https://docs.cloudfoundry.org</a>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Cloud Foundry: The Definitive Guide: <br>Develop, Deploy, and Scale (2017, O’Reilly)<br><br><br><strong>Courses</strong>
+</td>
+      <td style="text-align: left">Cloud Foundry eBooks: <br><a href="https://content.pivotal.io/ebooks">https://content.pivotal.io/ebooks</a>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">edX Course: <a href="https://courses.edx.org/courses/course-v1:LinuxFoundationX+LFS132x+1T2017/course/">https://edx.org</a><br><br><strong>Other</strong>
+</td>
+      <td style="text-align: left">CloudFoundry training materials: <br><a href="https://basics-workshop.cfapps.io">https://basics-workshop.cfapps.io</a>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Inquires: <a href="mailto:cloud-gov-inquiries@gsa.gov">cloud-gov-inquiries@gsa.gov</a>
+</td>
+      <td style="text-align: left">Twitter: @18F</td>
+    </tr>
+  </tbody>
+</table>
+
+</section>
+<section>
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>This is a peek at the guru-level view of Cloud Foundry. You’ll not need this anytime soon. <a href="#fnref:1" class="reversefootnote">↩</a></p>
+    </li>
+    <li id="fn:2">
+      <p>These environment variables are deliberately exposed by the app for demonstration purposes. You would never have this feature in any <em>real</em> app. <a href="#fnref:2" class="reversefootnote">↩</a></p>
+    </li>
+    <li id="fn:3">
+      <p><code>cf ssh</code> uses port 2222. If port 2222 is blocked, you’ll get a connection error <a href="#fnref:3" class="reversefootnote">↩</a></p>
+    </li>
+  </ol>
+</div></section>
+
+  </div>
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+
+<script>
+  (function() {
+  function extend( a, b ) {
+    for(var i in b) {
+      a[i] = b[i];
+    }
+  }
+  var baseOptions = {
+    transition: 'default',
+
+    dependencies: [
+      { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+      { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+      { src: 'plugin/zoom-js/zoom.js', async: true },
+      { src: 'plugin/notes/notes.js', async: true }
+    ]
+  };
+
+  
+
+  var configOptions = {"controls":true,"progress":true,"history":true,"center":true}
+  var initializeOptions = {};
+  extend(initializeOptions, baseOptions);
+  extend(initializeOptions, configOptions);
+  Reveal.initialize(initializeOptions);
+})();
+
+</script>
+
+  </body>
+</html>
