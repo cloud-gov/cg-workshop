@@ -109,7 +109,6 @@ footer: ![inline 14%](images/cloud-gov.png)
 
 [.footer: Video timestamp 07:15]
 
-
 # [fit]![inline](images/cloud-gov.png)
 
 * **Open-source Cloud Foundry PaaS atop AWS GovCloud[^2]**
@@ -162,7 +161,6 @@ footer: ![inline 14%](images/cloud-gov.png)
 
 [.footer: Video timestamp 10:26]
 
-
 # Three Stages
 
 * Procure
@@ -192,7 +190,6 @@ footer: ![inline 14%](images/cloud-gov.png)
 ---
 
 [.footer: Video timestamp 13:10]
-
 
 # Implement
 
@@ -251,7 +248,6 @@ cf set-space-role peterb prod SpaceAuditor
 
 ---
 
-
 [.footer: Video timestamp 16:20]
 
 [.build-lists: true]
@@ -269,7 +265,6 @@ cf set-space-role peterb prod SpaceAuditor
 
 [.footer: Video timestamp 17:07]
 
-
 # [fit] Implement: Python Application
 
 ``` 
@@ -284,7 +279,6 @@ cf scale cg-flask-demo -i 4
 
 [.footer: Video timestamp 17:30]
 
-
 # Implement: Language
 
 |  |  |  |
@@ -296,7 +290,6 @@ cf scale cg-flask-demo -i 4
 ---
 
 [.footer: Video timestamp 18:03]
-
 
 # Implement: Services
 
@@ -384,7 +377,6 @@ cf scale cg-flask-demo -i 4
 
 [.footer: Video timestamp 23:16]
 
-
 # Authorize: ATO & Security
 
 * 15 unshared controls, 41 shared
@@ -397,7 +389,6 @@ cf scale cg-flask-demo -i 4
 ---
 
 [.footer: Video timestamp 25:07]
-
 
 # Three Stages
 
@@ -433,7 +424,6 @@ cf scale cg-flask-demo -i 4
 ---
 
 [.footer: Video timestamp 26:55]
-
 
 ![right](images/18f-team-photo.jpg)
 

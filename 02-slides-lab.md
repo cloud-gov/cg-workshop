@@ -2,6 +2,11 @@ slidenumbers: true
 theme: work,7
 ![](images/cloud-gov-event.png)
 
+<!-- Generate the cheatsheet with:
+echo "## cloud.gov Workshop Cheatsheet" > cheatsheet.md
+awk '/CSBegin/,/CSEnd/' 02-slides-lab.md | sed 's/^#/###/' >> cheatsheet.md
+-->
+
 # I want to have a _command line utility_ installed
 # So that I can _deploy apps into cloud.gov_
 
@@ -30,7 +35,7 @@ The Cloud Foundry (_CF_) command-line interface (CLI) is a multiplatform binary 
 ---
 
 [.footer: Video timestamp 01:55]
-
+<!-- CSBegin -->
 # 2.1 Select and install the appropriate installer for your computer: 
 
 Go to [https://github.com/cloudfoundry/cli/releases](https://github.com/cloudfoundry/cli/releases) and select an `Installer` for your system. Download and go through the installation steps.
@@ -38,8 +43,9 @@ Go to [https://github.com/cloudfoundry/cli/releases](https://github.com/cloudfou
 On Macs, with Homebrew, you can use: 
 
 ```sh
-     brew cask install cloudfoundry-cli
+   brew cask install cloudfoundry-cli
 ```
+<!-- CSEnd -->
 
 On Workspaces, `cf` CLI is already installed.
 
@@ -50,14 +56,17 @@ On Workspaces, `cf` CLI is already installed.
 [.footer: Video timestamp 02:42]
 
 # 2.1 continued...
+<!-- CSBegin -->
 
 After the installer has finished, run the command:
 
 ```sh
-> cf
+   > cf
 ``` 
 
 and you should see a list of command options.
+
+<!-- CSEnd -->
 
 ^ When you have CF installed and working as on the next slide, we'll continue with authenticating your CLI to your _cloud.gov_ account.
 
@@ -87,20 +96,21 @@ Before getting started:
 
 [.footer: Video timestamp 03:25]
 
+<!-- CSBegin -->
 # 2.2 Login to cloud.gov with the _cf_ CLI
 
 You'll enter the command below, and you'll be directed to an _authentication URL_. 
 
 ```powershell
-cf login --sso -a https://api.fr.cloud.gov
+   cf login --sso -a https://api.fr.cloud.gov
 ```
 
 Confirm you're logged in by seeing the _orgs_ you belong to:
 
 ```powershell
-cf orgs
+   cf orgs
 ```
-
+<!-- CSEnd -->
 ---
 
 [.footer: Video timestamp 04:27]
@@ -180,25 +190,30 @@ Our simplest example. We'll get our _lab materials_, then use `cf push` to send 
 
 [.footer: Video timestamp 10:37]
 
+<!-- CSBegin -->
+
 # 3.1: Download labs 
+
 
 Mac/Linux shell:
 
 ```shell
-cd $HOME
-curl -Lo cgw.zip http://bit.ly/cgw-zip
-unzip cgw.zip
-cd cg-workshop-master
+   cd $HOME
+   curl -Lo cgw.zip http://bit.ly/cgw-zip
+   unzip cgw.zip
+   cd cg-workshop-master
 ```
 
 Windows Powershell:
 
 ```powershell
-cd $HOME
-iwr -o cgw.zip https://bit.ly/cgw-zip
-7z x cgz.zip   # If no 7zip, use File Explorer to unpack
-cd cg-workshop-master
+   cd $HOME
+   iwr -o cgw.zip https://bit.ly/cgw-zip
+   7z x cgz.zip   # If no 7zip, use File Explorer to unpack
+   cd cg-workshop-master
 ```
+
+<!-- CSEnd -->
 
 ^ Instructor: Run through the entire set of slides then wait for participants to catch up
 
@@ -230,15 +245,20 @@ d-----        9/26/2017  10:49 PM                lab05-state
 
 [.footer: Video timestamp 12:24]
 
+
+<!-- CSBegin -->
+
 # Lab 3.2: Deploy static website
 
 Don't literally use _myfname-lname_ below. Use your own name like, _jane-doe_:
 
 ```
-cf push -f lab03-site/manifest.yml myfname-lname
+   cf push -f lab03-site/manifest.yml myfname-lname
 ```
 
 ^ If you do use myfname-lname, you'll run into a `route conflict` with someone else trying to use that same name.`
+
+<!-- CSEnd -->
 
 ---
 [.footer: Video timestamp 13:03]
@@ -301,10 +321,12 @@ buildpack: staticfile
 
 ![right,fit](images/hello-cloud-gov.png)
 
+<!-- CSBegin -->
 Now try accessing your site at 
 
 https://fname-lname.app.cloud.gov
 
+<!-- CSEnd -->
 <br>
 <br>
 (If you care to try from command line...):
@@ -437,14 +459,15 @@ The Router distributes traffic across instances.
 ---
 
 [.footer: Video timestamp 21:12]
-
+<!-- CSBegin -->
 # Lab 4.1:  Review the _deployment manifest_
 
 ```powershell
-more lab04-app/manifest.yml
+   more lab04-app/manifest.yml
 ```
 
 How much memory/disk are we saving compared to defaults of 512Mb RAM and 1024Mb disk quota?
+<!-- CSEnd -->
 
 ---
  
@@ -475,12 +498,13 @@ _random-route_ will append random words to the URL.
 
 [.footer: Video timestamp 22:06]
 
+<!-- CSBegin -->
 # Lab 4.2 Push the application
 
 ```powershell
-cf push -f lab04-app/manifest.yml cglab
+   cf push -f lab04-app/manifest.yml cglab
 ```
-
+<!-- CSEnd -->
 ---
 
 [.footer: Video timestamp 22:19]
@@ -541,16 +565,17 @@ e.g., <br>
 
 ---
 
+<!-- CSBegin -->
 # Lab 4.3 Review the app status and health
 
 Run:
 
 ```
-cf app cglab
+   cf app cglab
 ```
 
 How much memory and disk is it using?
-
+<!-- CSEnd -->
 ---
 
 [.footer: Video timestamp 22:54]
@@ -614,6 +639,7 @@ Our application wll use its _environment variables_ to determine its connection 
 
 [.footer: Video timestamp 25:42]
 
+<!-- CSBegin -->
 # Lab 5.1 Review the available _services_
 
 Run the command below. How many Redis _services_ are there?
@@ -628,6 +654,7 @@ Examine `redis32` service details with the `-s` option.
    cf marketplace -s redis32
 ```
 
+<!-- CSEnd -->
 What's the max memory of the `micro` _plan_?
 
 ---
@@ -671,6 +698,7 @@ micro          Redis 3.2, persistent storage, 64Mb memory limit            free
 
 [.footer: Video timestamp 26:26]
 
+<!-- CSBegin -->
 # Lab 5.2: Create a Redis service with _create-service_
 
 The format for _create-service redis32_ is:
@@ -689,7 +717,7 @@ Wait one minute, then check your service with:
 ```
    cf service cglab-redis
 ```
-
+<!-- CSEnd -->
 ---
 
 [.footer: Video timestamp 27:08]
@@ -719,7 +747,7 @@ Updated: 2017-09-21T14:42:01Z
 ---
 
 [.footer: Video timestamp 27:23]
-
+<!-- CSBegin -->
 # Lab 5.3 Associate service and app with _bind-service_
 
 The app, _cglab_ needs to know about _cglab-redis_. The _bind-service_ shares service information by setting _environment variables_ in the app container.
@@ -737,6 +765,8 @@ View the environment variables in the app with:
 ```
 
 What's the first service under `VCAP_SERVICES`?
+
+<!-- CSEnd -->
 
 ---
 
@@ -769,6 +799,7 @@ System-Provided:
 
 [.footer: Video timestamp 28:10]
 
+<!-- CSBegin -->
 # Lab 5.4 Push the new version of our app
 
 Now we can push the version of the app that uses the data store. Run:
@@ -781,6 +812,7 @@ Has the app's URL changed?
 
 Visit your app at the URL. Refresh page multiple times. What does the app do?
 
+<!-- CSEnd -->
 ---
 
 [.footer: Video timestamp 28:41]
@@ -819,7 +851,7 @@ buildpack: ruby_buildpack
 ---
 
 [.footer: Video timestamp 29:13]
-
+<!-- CSBegin -->
 # Lab 5.5 Scaling
 
 Since CF stores executable artifacts and runs them in containers, you can quickly _scale_ your app to meet demand.
@@ -831,6 +863,7 @@ Scale _cglab_ to two instances, then immediately, refresh the _cglab_ webapp pag
 ```
 
 How long until a new instance was available?
+<!-- CSEnd -->
 
 ---
 
@@ -915,6 +948,7 @@ In the long-term, you'll need to do application maintenance via _restage_ to pic
 
 [.footer: Video timestamp 31:57 ]
 
+<!-- CSBegin -->
 # Lab 6.1: View live application logs
 
 View current app activity:
@@ -926,7 +960,7 @@ View current app activity:
 Then interact with your _cglab_ webpage. Press `Ctrl-C` to stop log streaming
 
 Do you see any logs from the router? From the app?
-
+<!-- CSEnd -->
 ---
 
 [.footer: Video timestamp 32:40]
@@ -948,6 +982,8 @@ All cloud.gov logs are automatically streamed to an internal Elasticsearch/Kiban
 
 [.footer: Video timestamp 33:27]
 
+<!-- CSBegin -->
+
 # Lab 6.2: View historical logs in Kibana
 
 
@@ -955,6 +991,9 @@ All cloud.gov logs are automatically streamed to an internal Elasticsearch/Kiban
 * Enter `ERR` in the Search box, then search
 * Click the ▶︎ triangle to expand, then seek _@message_
 * What error is our _cglab_ application giving?
+
+<!-- CSEnd -->
+
 
 ![inline, 96%](lab05-state/images/kibana-search.png)
 
@@ -977,7 +1016,7 @@ _Check your work 6.2 2/2_
 ---
 
 [.footer: Video timestamp 34:46]
-
+<!-- CSBegin -->
 # Lab 6.3: Application Events
 
 _Events_ are generated by CloudFoundry, _about_ your application.
@@ -987,7 +1026,7 @@ View application events. Do you see any CRASH events?
 ```
    cf events cglab
 ```
-
+<!-- CSEnd -->
 ---
 
 [.footer: Video timestamp 35:18]
@@ -1009,7 +1048,7 @@ You shouldn't see any CRASH events
 ---
 
 [.footer: Video timestamp 35:31]
-
+<!-- CSBegin -->
 # Lab 6.4: SSH to debug _cglab_
 
 Connect to your _cglab_ application[^3]
@@ -1023,6 +1062,8 @@ You'll be connected a Linux container. To see all processes, run the command bel
 ```
    ps -ef
 ```
+
+<!-- CSEnd -->
 
 [^3]: `cf ssh` uses port 2222. If port 2222 is blocked, you'll get a connection error
 
@@ -1100,7 +1141,7 @@ Most of these _delete_ commands expect a _Y_ confirmation.
 ---
 
 [.footer: Video timestamp 39:07]
-
+<!-- CSBegin -->
 # Lab 8.1: Delete apps with _cf delete_
 
 List all your apps with:
@@ -1115,7 +1156,7 @@ Then delete each one, e.g.:
    cf delete cglab
    cf delete myfname-lname # use the real app name
 ```
-
+<!-- CSEnd -->
 ---
 
 [.footer: Video timestamp 39:33]
@@ -1139,7 +1180,7 @@ OK
 ---
 
 [.footer: Video timestamp 39:45]
-
+<!-- CSBegin -->
 # Lab 8.2: Delete services 
 
 List all your services with:
@@ -1153,7 +1194,7 @@ Then delete each one, e.g.:
 ```
    cf delete-service cglab-redis
 ```
-
+<!-- CSEnd -->
 ---
 
 [.footer: Video timestamp 39:57]
@@ -1177,7 +1218,7 @@ OK
 ---
 
 [.footer: Video timestamp 40:09]
-
+<!-- CSBegin -->
 # Lab 8.3: Delete unused routes
 
 CloudFoundry automatically creates _routes_ for your web application. List your routes with:
@@ -1191,7 +1232,7 @@ Routes that no longer connect to apps are _orphaned_. Clean them all up with:
 ```
    cf delete-orphaned-routes
 ```
-
+<!-- CSEnd -->
 ---
 
 [.footer: Video timestamp 40:49]
