@@ -52,10 +52,14 @@ footer: ![inline 14%](images/cloud-gov.png)
 
 ---
 
+[.footer: Video timestamp 04:02]
+
 ![](images/cloud-gov-event.png)
 # [fit] 1 / The Mission
 
 ---
+
+[.footer: Video timestamp 04:19]
 
 [.build-lists: true]
 ![right](images/18f-team-photo.jpg)
@@ -76,6 +80,8 @@ footer: ![inline 14%](images/cloud-gov.png)
 ^ Note: This team has a lot of work to do to realize their mission. 
 
 ---
+
+[.footer: Video timestamp 04:52]
 
 [.build-lists: true]
 # Platform
@@ -101,6 +107,9 @@ footer: ![inline 14%](images/cloud-gov.png)
 
 ---
 
+[.footer: Video timestamp 07:15]
+
+
 # [fit]![inline](images/cloud-gov.png)
 
 * **Open-source Cloud Foundry PaaS atop AWS GovCloud[^2]**
@@ -112,6 +121,8 @@ footer: ![inline 14%](images/cloud-gov.png)
 
 
 ---
+
+[.footer: Video timestamp 08:15]
 
 [.footer: ]
 
@@ -141,11 +152,16 @@ footer: ![inline 14%](images/cloud-gov.png)
 
 ---
 
+[.footer: Video timestamp 10:24]
+
 ![](images/cloud-gov-event.png)
 # [fit] 2 / Getting to Launch
 
 
 ---
+
+[.footer: Video timestamp 10:26]
+
 
 # Three Stages
 
@@ -154,6 +170,8 @@ footer: ![inline 14%](images/cloud-gov.png)
 * Authorize
 
 ---
+
+[.footer: Video timestamp 10:52]
 
 # Procure
 
@@ -165,11 +183,16 @@ footer: ![inline 14%](images/cloud-gov.png)
 
 ---
 
+[.footer: Video timestamp 11:42]
+
 # Pricing
 
 ![inline](images/pricing.png)
 
 ---
+
+[.footer: Video timestamp 13:10]
+
 
 # Implement
 
@@ -178,6 +201,8 @@ footer: ![inline 14%](images/cloud-gov.png)
 * Services
 
 ---
+
+[.footer: Video timestamp 13:30]
 
 ![left,fit](images/org-space-app-user.png)
 # Implement: Users & Roles
@@ -190,13 +215,19 @@ footer: ![inline 14%](images/cloud-gov.png)
 
 ---
 
+[.footer: Video timestamp 15:03]
+
 ![](https://www.site24x7.com/help/images/aws-iam-attach-policy.png)
 
 ---
 
+[.footer: Video timestamp 15:24]
+
 ![](images/cg-user-mgmt.png)
 
 ---
+
+[.footer: Video timestamp 15:47]
 
 # Implement: Dev/Stage/Prod
 
@@ -208,6 +239,8 @@ cf create-space prod
 
 ---
 
+[.footer: Video timestamp 16:02]
+
 # Implement: Users w/ Spaces
 
 ```sh
@@ -217,6 +250,9 @@ cf set-space-role peterb prod SpaceAuditor
 
 
 ---
+
+
+[.footer: Video timestamp 16:20]
 
 [.build-lists: true]
 # [fit] Time machine
@@ -231,6 +267,9 @@ cf set-space-role peterb prod SpaceAuditor
 
 ---
 
+[.footer: Video timestamp 17:07]
+
+
 # [fit] Implement: Python Application
 
 ``` 
@@ -243,6 +282,9 @@ cf scale cg-flask-demo -i 4
 
 ---
 
+[.footer: Video timestamp 17:30]
+
+
 # Implement: Language
 
 |  |  |  |
@@ -252,6 +294,9 @@ cf scale cg-flask-demo -i 4
 | php | binary | dotnet  |
 
 ---
+
+[.footer: Video timestamp 18:03]
+
 
 # Implement: Services
 
@@ -269,6 +314,8 @@ cf scale cg-flask-demo -i 4
 
 ---
 
+[.footer: Video timestamp 20:22]
+
 [.autoscale: false]
 ## Implement: Logs & Diagnostics
 
@@ -279,6 +326,8 @@ cf scale cg-flask-demo -i 4
 
 ---
 
+[.footer: Video timestamp 20:59]
+
 # Three Stages
 
 * **Procure**
@@ -286,6 +335,9 @@ cf scale cg-flask-demo -i 4
 * Authorize
 
 ---
+
+[.footer: Video timestamp 21:10]
+
 ![](images/stackOfPaper-pixabayCC0.jpg)
 # Authorize
 
@@ -302,6 +354,8 @@ cf scale cg-flask-demo -i 4
 ^ Systems need to be classified: Violaion of CIA: Low, Moderate, Hi. Depending on classification, then appropriate controls in place. 4004 pages
 
 ---
+
+[.footer: Video timestamp 21:46]
 
 # Authorize: Controls
 
@@ -328,6 +382,9 @@ cf scale cg-flask-demo -i 4
 
 ---
 
+[.footer: Video timestamp 23:16]
+
+
 # Authorize: ATO & Security
 
 * 15 unshared controls, 41 shared
@@ -338,6 +395,9 @@ cf scale cg-flask-demo -i 4
 ^ credit-card cloud (server in closet).
 
 ---
+
+[.footer: Video timestamp 25:07]
+
 
 # Three Stages
 
@@ -351,6 +411,8 @@ cf scale cg-flask-demo -i 4
 
 ---
 
+[.footer: Video timestamp 25:15]
+
 # [fit] Road map features
 
 * TIC ingress control
@@ -362,11 +424,16 @@ cf scale cg-flask-demo -i 4
 
 ---
 
+[.footer: Video timestamp 26:51]
+
 ![](images/cloud-gov-event.png)
 
 # Let's revisit the mission...
 
 ---
+
+[.footer: Video timestamp 26:55]
+
 
 ![right](images/18f-team-photo.jpg)
 

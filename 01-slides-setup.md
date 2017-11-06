@@ -20,6 +20,8 @@ This deck is a separate file since it's mostly screenshots, and shouldn't be pri
 
 ---
 
+[.footer: Video timestamp 00:36]
+
 ![](images/cloud-gov-event.png)
 
 # As federal PM/Developer/CISO,
@@ -29,6 +31,8 @@ This deck is a separate file since it's mostly screenshots, and shouldn't be pri
 ^ We're not printing these slides since mostly screenshots. User Stories FTW! Once we complete the static website lab we'll take a ten-minute break, and get some guidannce to those who are having trouble, since this is the part of the morning with the most _variance_
 
 ---
+
+[.footer: Video timestamp 00:49]
 
 # Have visible:
 
@@ -44,10 +48,13 @@ See next page for example
 
 ---
 
+
 [.hide-footer]
 ![](images/screenshot.png)
 
 ---
+
+[.footer: Video timestamp 01:28]
 
 # If you're using an _Amazon Workspace_
 
@@ -57,7 +64,8 @@ See next page for example
 
 ---
 
-[.hide-footer]
+[.footer: Video timestamp 01:53]
+
 ![](https://s3-us-gov-west-1.amazonaws.com/cg-public/Workspaces.mp4)
 
 _Amazon Workspace_
@@ -65,6 +73,8 @@ _Amazon Workspace_
 ^ This starts from getting your invitation. Note that native client is preferred, this video shows the web client. The password is different from any other password you're setting up/using today. This just shows one way to get your computer set up for the workshop. Play and continue
 
 ---
+
+[.footer: Video timestamp 02:53]
 
 ![](images/cloud-gov-event.png)
 
@@ -74,6 +84,9 @@ _Amazon Workspace_
 ^ At this point you have your computer set up with browser windows and a terminal or powershell window.
 
 ---
+
+<!-- https://youtu.be/ip8G_Rafb_c?t=3m10s -->
+[.footer: Video timestamp 03:12]
 
 # 1. Sign up for an account
 
@@ -88,7 +101,8 @@ If you already have an account, please make sure you can reach:
 
 ---
 
-[.hide-footer]
+[.footer: Video timestamp 03:34]
+
 # 1: Sign up for an account ...
 
 Visit: [https://account.fr.cloud.gov/signup](https://account.fr.cloud.gov/signup)
@@ -207,7 +221,8 @@ Google Authenticator or Microsoft Authenticator or Authy
 
 ---
 
-[.hide-footer]
+[.footer: Video timestamp 06:44]
+
 # Future _cloud.gov_ logins to, e.g. _https://dashboard.fr.cloud.gov_
 
 ![inline](lab01-setup/images/login01.png) ![inline](lab01-setup/images/login02.png) 
