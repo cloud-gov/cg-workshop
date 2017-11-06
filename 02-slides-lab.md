@@ -1,6 +1,5 @@
 slidenumbers: true
 theme: work,7
-footer: [https://github.com/18F/cg-workshop](https://github.com/18F/cg-workshop) 02-slides-lab.md
 ![](images/cloud-gov-event.png)
 
 # I want to have a _command line utility_ installed
@@ -9,6 +8,8 @@ footer: [https://github.com/18F/cg-workshop](https://github.com/18F/cg-workshop)
 ^ We have our login, now how do we run stuff? With a CLI
 
 ---
+
+[.footer: Video Timestamp: 00:14]
 
 # Why the `cf` CLI?
 
@@ -22,9 +23,14 @@ The Cloud Foundry (_CF_) command-line interface (CLI) is a multiplatform binary 
 
 ---
 
+[.footer: Video timestamp 01:45]
+
 # Lab 2: Install cloudfoundry tools and login to cloud.gov
 
 ---
+
+[.footer: Video timestamp 01:55]
+
 # 2.1 Select and install the appropriate installer for your computer: 
 
 Go to [https://github.com/cloudfoundry/cli/releases](https://github.com/cloudfoundry/cli/releases) and select an `Installer` for your system. Download and go through the installation steps.
@@ -41,6 +47,8 @@ On Workspaces, `cf` CLI is already installed.
 
 ---
 
+[.footer: Video timestamp 02:42]
+
 # 2.1 continued...
 
 After the installer has finished, run the command:
@@ -54,6 +62,8 @@ and you should see a list of command options.
 ^ When you have CF installed and working as on the next slide, we'll continue with authenticating your CLI to your _cloud.gov_ account.
 
 ---
+
+[.footer: Video timestamp 02:51]
 
 # Check your work 2.1
 
@@ -75,6 +85,8 @@ Before getting started:
 
 ---
 
+[.footer: Video timestamp 03:25]
+
 # 2.2 Login to cloud.gov with the _cf_ CLI
 
 You'll enter the command below, and you'll be directed to an _authentication URL_. 
@@ -91,6 +103,8 @@ cf orgs
 
 ---
 
+[.footer: Video timestamp 04:27]
+
 # Check your work 2.2
 
 ```
@@ -104,6 +118,8 @@ Visit the URL [https://login.fr.cloud.gov/passcode](https://login.fr.cloud.gov/p
 
 ---
 
+[.footer: Video timestamp ]
+
 # _cloud.gov CLI login_
 
 ![](https://s3-us-gov-west-1.amazonaws.com/cg-public/cg-otp-login-fast.mp4)
@@ -111,6 +127,8 @@ Visit the URL [https://login.fr.cloud.gov/passcode](https://login.fr.cloud.gov/p
 ^ View login video at https://s3-us-gov-west-1.amazonaws.com/cg-public/cg-otp-login-fast.mp4
 
 ---
+
+[.footer: Video timestamp 06:00]
 
 # Check your work 2.2, continued
 
@@ -123,6 +141,8 @@ sandbox-cao
 ```
 
 ---
+
+[.footer: Video timestamp 07:17]
 
 # Further exploration
 
@@ -139,12 +159,16 @@ Once you have `cf orgs` working, try the following:
 
 ---
 
+[.footer: Video timestamp 09:41]
+
 ![](images/cloud-gov-event.png)
 
 # I want my website to be _accessible at a public URL_
 # So that the _American people_ can read it
 
 ---
+
+[.footer: Video timestamp 10:00]
 
 # Lab 3: Download _workshop labs_ and deploy a _static website_ to _yourname_.app.cloud.gov
 
@@ -153,6 +177,8 @@ Our simplest example. We'll get our _lab materials_, then use `cf push` to send 
 ^ We have working environment, a cloud.gov account, a working `cf` connection to the cloud.gov account. Now we need to materials for the rest of our labs. Then we can release a website.
 
 ---
+
+[.footer: Video timestamp 10:37]
 
 # 3.1: Download labs 
 
@@ -178,6 +204,8 @@ cd cg-workshop-master
 
 ---
 
+[.footer: Video timestamp 11:57]
+
 # Check your work 3.1
 
 Run `ls`. You should see output similar to the following:
@@ -200,6 +228,7 @@ d-----        9/26/2017  10:49 PM                lab05-state
 
 ---
 
+[.footer: Video timestamp 12:24]
 
 # Lab 3.2: Deploy static website
 
@@ -212,6 +241,7 @@ cf push -f lab03-site/manifest.yml myfname-lname
 ^ If you do use myfname-lname, you'll run into a `route conflict` with someone else trying to use that same name.`
 
 ---
+[.footer: Video timestamp 13:03]
 
 [.build-lists: true]
 # What happens when I _cf push_? (v1.0)
@@ -228,11 +258,16 @@ cf push -f lab03-site/manifest.yml myfname-lname
 
 ---
 
+[.footer: Video timestamp 13:35]
+
+
 ![fit](images/app_push_flow_diagram_diego.png)
 
 ^ You run a `cf` command. Terms: "Binary data store" "database"<br>Applications are run in 'containers' hosted in 'Cells'. First a staging cell builds your application and all the dependencies, and stores in the binary store. Then 'Running' cell can pick it up and run one or more copies of it.
 
 ---
+
+[.footer: Video timestamp 14:37]
 
 # Check your work 3.2
 
@@ -256,9 +291,11 @@ buildpack: staticfile
 #0   running   2017-09-26 10:27:29 AM   0.0%   3.9M of 16M   6.2M of 32M
 ```
 
-[.footer: continued...]
 
 ---
+
+[.footer: Video timestamp 15:15]
+
 
 # Check your work 3.2, continued
 
@@ -281,6 +318,8 @@ https://fname-lname.app.cloud.gov
 
 ---
 
+[.footer: Video timestamp 15:27]
+
 # Further exploration
 
 When you can access your site, try the following:
@@ -295,6 +334,8 @@ When you can access your site, try the following:
 ^ Instructor: Wait here for most participants to reach their static page.
 
 ---
+
+[.footer: Video timestamp 15:48]
 
 ![](images/cloud-gov-event.png)
 
@@ -314,12 +355,16 @@ You can skip doing _cf push_ as we'll pick up from there in the next section.
 
 ---
 
+[.footer: Video timestamp 16:00]
+
 ![](images/cloud-gov-event.png)
 
 # I want to run a _dynamic webapp_
 # So that users can _interact_ with us
 
 ---
+
+[.footer: Video timestamp 16:55]
 
 # Lab 4: Sinatra Application
 
@@ -330,6 +375,8 @@ The manifest provides application _metadata_ to CloudFoundry. We use it for non-
 ^ As with static site, let's review the slides, then we'll pause for everyone to run the commands<br> Sinatra is a _ruby_ web framework. The deployment process is the same for any supported Cloud Foundry language.  <br>First, let's revisit and update what happens with CF PUSH:
 
 ---
+
+[.footer: Video timestamp 17:56]
 
 [.build-lists: true]
 
@@ -348,6 +395,8 @@ The manifest provides application _metadata_ to CloudFoundry. We use it for non-
 
 ---
 
+[.footer: Video timestamp 18:35]
+
 # Buildpacks create a runnable artifact called a droplet
 
 App Files + Runtime Dependencies = App Artifact (droplet)
@@ -361,6 +410,8 @@ The Router distributes traffic across instances.
 ^A couple points about how CF pulls things together  <br>If you look at the labs04-app/Gemfile you'll see a lot of dependencies that the buildpack handles. Buildpacks can be used so there are no online dependencies in your application push.  <br>The apps run in container instances that can be migrated between cells for resource management and uptime.
 
 ---
+
+[.footer: Video timestamp 20:46]
 
 # Where does the app run?
 
@@ -385,6 +436,8 @@ The Router distributes traffic across instances.
 
 ---
 
+[.footer: Video timestamp 21:12]
+
 # Lab 4.1:  Review the _deployment manifest_
 
 ```powershell
@@ -394,6 +447,8 @@ more lab04-app/manifest.yml
 How much memory/disk are we saving compared to defaults of 512Mb RAM and 1024Mb disk quota?
 
 ---
+ 
+[.footer: Video timestamp 21:35]
 
 # Check your work 4.1
 
@@ -418,6 +473,8 @@ _random-route_ will append random words to the URL.
 
 ---
 
+[.footer: Video timestamp 22:06]
+
 # Lab 4.2 Push the application
 
 ```powershell
@@ -425,6 +482,8 @@ cf push -f lab04-app/manifest.yml cglab
 ```
 
 ---
+
+[.footer: Video timestamp 22:19]
 
 # Check your work 4.2, 1/3
 
@@ -443,9 +502,10 @@ Downloaded ruby_buildpack (81.6K)
 ... [snip] ...
 ```
 
-[.footer: continued....]
 
 ---
+
+[.footer: Video timestamp 22:31]
 
 # check your work 4.2, continued 2/3
 
@@ -467,6 +527,8 @@ buildpack: ruby
 [.footer: continued....]
 
 --- 
+
+[.footer: Video timestamp 22:41]
 
 # check your work 4.2, continued 3/3
 
@@ -491,6 +553,8 @@ How much memory and disk is it using?
 
 ---
 
+[.footer: Video timestamp 22:54]
+
 # Check your work 4.3
 
 The _cf app_ output should resemble:
@@ -512,6 +576,8 @@ buildpack:         ruby
 ```
 
 ---
+ 
+[.footer: Video timestamp 23:38]
 
 # Further exploration
 
@@ -525,12 +591,16 @@ Once you've visited your app and viewed `cf app cglab`, try the following:
 
 ---
 
+[.footer: Video timestamp 24:19]
+
 ![](images/cloud-gov-event.png)
 
 # I want to store data in a _service_
 # So that it is persistent and shared
 
 ---
+
+[.footer: Video timestamp 24:52 ]
 
 # Lab 5. I can share persistent data between app instances
 
@@ -541,6 +611,8 @@ We'll then _bind_ that service to our application.
 Our application wll use its _environment variables_ to determine its connection information
 
 ---
+
+[.footer: Video timestamp 25:42]
 
 # Lab 5.1 Review the available _services_
 
@@ -560,6 +632,8 @@ What's the max memory of the `micro` _plan_?
 
 ---
 
+[.footer: Video timestamp 26:11]
+
 # Check your work 5.1
 
 ```
@@ -575,6 +649,8 @@ redis32         micro, standard-ha, standard       An open source in-memory data
 ^ There are two Redis _services_, `redis28` and `redis32`.
 
 ---
+
+[.footer: Video timestamp 26:22]
 
 # Check your work 5.1, continued 2/2
 
@@ -592,6 +668,8 @@ micro          Redis 3.2, persistent storage, 64Mb memory limit            free
 ^ The  _micro_  plan is capped at 64Mb (enough for ~800,000 short keys)
 
 ---
+
+[.footer: Video timestamp 26:26]
 
 # Lab 5.2: Create a Redis service with _create-service_
 
@@ -613,6 +691,8 @@ Wait one minute, then check your service with:
 ```
 
 ---
+
+[.footer: Video timestamp 27:08]
 
 # Check your work 5.2
 
@@ -638,6 +718,8 @@ Updated: 2017-09-21T14:42:01Z
 
 ---
 
+[.footer: Video timestamp 27:23]
+
 # Lab 5.3 Associate service and app with _bind-service_
 
 The app, _cglab_ needs to know about _cglab-redis_. The _bind-service_ shares service information by setting _environment variables_ in the app container.
@@ -657,6 +739,8 @@ View the environment variables in the app with:
 What's the first service under `VCAP_SERVICES`?
 
 ---
+
+[.footer: Video timestamp 27:52]
 
 # Check your work 5.3
 
@@ -683,6 +767,8 @@ System-Provided:
 
 ---
 
+[.footer: Video timestamp 28:10]
+
 # Lab 5.4 Push the new version of our app
 
 Now we can push the version of the app that uses the data store. Run:
@@ -696,6 +782,8 @@ Has the app's URL changed?
 Visit your app at the URL. Refresh page multiple times. What does the app do?
 
 ---
+
+[.footer: Video timestamp 28:41]
 
 # Check your work 5.4
 
@@ -722,11 +810,15 @@ buildpack: ruby_buildpack
 
 ---
 
+[.footer: Video timestamp 28:56]
+
 # Check your work 5.4, continued
 
 ![fit,right](lab05-state/images/running.png)
 
 ---
+
+[.footer: Video timestamp 29:13]
 
 # Lab 5.5 Scaling
 
@@ -742,6 +834,8 @@ How long until a new instance was available?
 
 ---
 
+[.footer: Video timestamp 29:25]
+
 ![right,fit](lab05-state/images/scale.png)
 # Check your work 5.5 
 
@@ -756,6 +850,8 @@ OK
 About 10 seconds for new instance to come up
 
 --- 
+
+[.footer: Video timestamp 29:42]
 
 # Review: Where does the app run?
 
@@ -780,6 +876,8 @@ About 10 seconds for new instance to come up
 
 ---
 
+[.footer: Video timestamp 29:55]
+
 # Further exploration
 
 Once you've seen the app count visits per scaled instance:
@@ -795,6 +893,8 @@ http://cglab....app.cloud.gov/env
 
 ---
 
+[.footer: Video timestamp 30:38]
+
 
 ![](images/cloud-gov-event.png)
 
@@ -803,6 +903,8 @@ http://cglab....app.cloud.gov/env
 
 ---
 
+[.footer: Video timestamp 30:53]
+
 # Lab 6. I can investigate my apps to determine the cause of errors
 
 Let's look at application _logs_, _events_ and live debugging over _ssh_. 
@@ -810,6 +912,8 @@ Let's look at application _logs_, _events_ and live debugging over _ssh_.
 In the long-term, you'll need to do application maintenance via _restage_ to pick up Buildpack updates
 
 ---
+
+[.footer: Video timestamp 31:57 ]
 
 # Lab 6.1: View live application logs
 
@@ -824,6 +928,8 @@ Then interact with your _cglab_ webpage. Press `Ctrl-C` to stop log streaming
 Do you see any logs from the router? From the app?
 
 ---
+
+[.footer: Video timestamp 32:40]
 
 # Check your work 6.1
 
@@ -840,6 +946,8 @@ All cloud.gov logs are automatically streamed to an internal Elasticsearch/Kiban
 
 ---
 
+[.footer: Video timestamp 33:27]
+
 # Lab 6.2: View historical logs in Kibana
 
 
@@ -852,17 +960,23 @@ All cloud.gov logs are automatically streamed to an internal Elasticsearch/Kiban
 
 ---
 
+[.footer: Video timestamp 34:26]
+
 _Check your work 6.2 1/2_
 
 ![inline](lab05-state/images/kibana-results.png) 
 
 ---
 
+[.footer: Video timestamp 34:41]
+
 _Check your work 6.2 2/2_
 
 ![inline](lab05-state/images/kibana-view-msg.png)
 
 ---
+
+[.footer: Video timestamp 34:46]
 
 # Lab 6.3: Application Events
 
@@ -875,6 +989,8 @@ View application events. Do you see any CRASH events?
 ```
 
 ---
+
+[.footer: Video timestamp 35:18]
 
 # Check your work 6.3
 
@@ -891,6 +1007,8 @@ time                          event                      actor          descript
 You shouldn't see any CRASH events
 
 ---
+
+[.footer: Video timestamp 35:31]
 
 # Lab 6.4: SSH to debug _cglab_
 
@@ -909,6 +1027,8 @@ You'll be connected a Linux container. To see all processes, run the command bel
 [^3]: `cf ssh` uses port 2222. If port 2222 is blocked, you'll get a connection error
 
 ---
+
+[.footer: Video timestamp 36:26]
 
 # Check your work, 6.4
 
@@ -933,6 +1053,8 @@ About 7 or 8 processes running. To end a session, run:
 
 ---
 
+[.footer: Video timestamp 36:43]
+
 # Further exploration, Lab 6
 
 Once you've seen _logs_, _events_ and used _ssh_, try:
@@ -942,6 +1064,8 @@ Once you've seen _logs_, _events_ and used _ssh_, try:
 * View cloud.gov status: [https://cloudgov.statuspage.io](https://cloudgov.statuspage.io)
 
 ---
+
+[.footer: Video timestamp 37:32]
 
 ![](images/cloud-gov-event.png)
 
@@ -963,6 +1087,8 @@ Once you've seen _logs_, _events_ and used _ssh_, try:
 
 ---
 
+[.footer: Video timestamp 38:23]
+
 # Lab 8: Clean-up
 
 Unused apps and resources expend resources and may present an attack surface.
@@ -972,6 +1098,8 @@ We'll clean up from today with _delete_ (app), _delete-services_ and _delete-orp
 Most of these _delete_ commands expect a _Y_ confirmation.
 
 ---
+
+[.footer: Video timestamp 39:07]
 
 # Lab 8.1: Delete apps with _cf delete_
 
@@ -989,6 +1117,8 @@ Then delete each one, e.g.:
 ```
 
 ---
+
+[.footer: Video timestamp 39:33]
 
 # Check your work, 8.1
 
@@ -1008,6 +1138,8 @@ OK
 
 ---
 
+[.footer: Video timestamp 39:45]
+
 # Lab 8.2: Delete services 
 
 List all your services with:
@@ -1023,6 +1155,8 @@ Then delete each one, e.g.:
 ```
 
 ---
+
+[.footer: Video timestamp 39:57]
 
 # Check your work, 8.2
 
@@ -1042,6 +1176,8 @@ OK
 
 ---
 
+[.footer: Video timestamp 40:09]
+
 # Lab 8.3: Delete unused routes
 
 CloudFoundry automatically creates _routes_ for your web application. List your routes with:
@@ -1057,6 +1193,8 @@ Routes that no longer connect to apps are _orphaned_. Clean them all up with:
 ```
 
 ---
+
+[.footer: Video timestamp 40:49]
 
 # Check your work, 8.3
 
@@ -1079,6 +1217,8 @@ OK
 
 ---
 
+[.footer: Video timestamp 41:15]
+
 ![](images/cloud-gov-event.png)
 
 # Congratulations!
@@ -1095,6 +1235,8 @@ You have completed the workshop
 and tidied up after yourself!
 
 ---
+
+[.footer: Video timestamp 41:35]
 
 | Docs   |   |
 |:--- | :--- |

@@ -119,3 +119,28 @@ done
 | Inquires: [cloud-gov-inquiries@gsa.gov](mailto:cloud-gov-inquiries@gsa.gov) | Twitter: @18F |
 
 -->
+
+# Why DeckSet?
+
+I've been asked why I used DeckSet for slides.
+
+First, I wanted my slides to render well as slides _and_ to be usable as GitHub pages and handouts. Also, since there's a lot of code that could get screwed up with an errant edit, that I could use Git with the slide to review changes before committing. That eliminated pretty much everything except Reveal.js (and related frameworks) and DeckSet (which I was tuned into a few weeks ago)
+
+Deckset wins:
+- live preview
+- sensible image placement (left, right, inline, autofit)
+- columns (image right, text left, e.g)
+- BIG FONTS
+- **code block autoscaling**
+- code block line highlighting
+- autofilter background images
+- serverless
+
+Reveal wins:
+- formatting doesn't render (e.g. `footer:` `slide-numbers:`)
+- custom CSS (e.g. https://github.com/18F/18f-reveal.js-theme)
+  - v2 DeckSet will support this.
+- CSS fine-tuning (YAGNI)
+- free (DeckSet is $30)
+
+# How to 
